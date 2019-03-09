@@ -1,9 +1,9 @@
 # Vapor
 
 ## Installation
+(_run from project root folder_)
 
-
-### Install dependiencies for server/client (_from project root folder_):
+### Install dependiencies for server/client :
 `npm run frontend-install`
 * Install dependencies from both folders
 

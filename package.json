@@ -6,7 +6,6 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
-
   },
   "dependencies": {
     "concurrently": "^4.1.0"

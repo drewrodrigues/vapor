@@ -5,12 +5,16 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
+    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "dev:debug": "concurrently \"npm run server:inspect\" \"npm run client\"",
     "start": "node app.js",
     "server": "nodemon app.js",
     "server:inspect": "nodemon --inspect app.js",
     "server:debug": "DEBUG=express:* nodemon index.js"
+  },
+  "engines": {
+    "node": "8.11.4"
   },
   "dependencies": {
     "axios": "^0.18.0",

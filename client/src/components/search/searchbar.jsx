@@ -11,7 +11,9 @@ const getSuggestions = value => {
 
     return inputLength === 0 ? [] : (steamGames.filter(game => 
         game.name.toLowerCase().slice(0,inputLength) === inputValue
-        )).slice(0,10);
+        ).sort((a,b)=>{
+            return a.name.length - b.name.length || a.name.localeCompare(b.name);
+        }).slice(0,50))
 };
 
 const getSuggestionValue = suggestion => {
@@ -32,8 +34,6 @@ class Searchbar extends React.Component{
             gameId: null,
             suggestions: []
         };
-        
-        
     }
     
     onChange = (event, { newValue }) => {
@@ -50,8 +50,11 @@ class Searchbar extends React.Component{
     };
     
     onSuggestionsFetchRequested = ({ value }) => {
+        let suggestions = getSuggestions(value)
+        suggestions = suggestions
+        debugger
         this.setState({
-            suggestions: getSuggestions(value)
+            suggestions: suggestions
         });
     };
     

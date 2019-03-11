@@ -14,7 +14,9 @@ const getSuggestions = value => {
         )).slice(0,10);
 };
 
-const getSuggestionValue = suggestion => suggestion.appid;
+const getSuggestionValue = suggestion => {
+    return suggestion
+};
 
 const renderSuggestion = suggestion => (
     <div>
@@ -27,6 +29,7 @@ class Searchbar extends React.Component{
         super(props);
         this.state = {
             value: '',
+            gameId: null,
             suggestions: []
         };
         
@@ -34,9 +37,16 @@ class Searchbar extends React.Component{
     }
     
     onChange = (event, { newValue }) => {
-        this.setState({
-            value: newValue
-        });
+        if(typeof newValue === "string"){
+            this.setState({
+                value: newValue,
+            });
+        } else {
+            this.setState({
+                value: newValue.name,
+                gameId: newValue.appid
+            })
+        }
     };
     
     onSuggestionsFetchRequested = ({ value }) => {

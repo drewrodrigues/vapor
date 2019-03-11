@@ -7,7 +7,11 @@ const Screenshot = ({ screenshots }) => {
 
   return (
     <div className="bg-screenshot">
-      <img src={`https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`} />
+      <img position="fixed"
+           max-height="100%"
+           max-width="100%"
+           z-index="-1"
+           src={`https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`} />
     </div>
   )
 }

@@ -31,28 +31,31 @@ export const getSteamBG = (id) => (
 )
 
 // IGDB
-export const getIgdbApp = (id) => (
+export const getIgdbApp = (name) => {
+    let data = `fields *; where name = "${name}";`;
+
     axios({
-        url: `/external/igdb/${id}`,
-        method: 'GET'
+        url: `/external/igdb/games`,
+        method: 'POST',
+        data: {
+            data
+        }
     })
     .then(response => {
         console.log(response.data);
     })
     .catch(err => {
-        console.error(err);
+        console.error(err.error);
     })
-)
+}
 
 export const getScreenshots = gameId => {
-    let screenshotData = `fields *; where game = ${gameId};`;
+    let data = `fields *; where game = ${gameId};`;
 
     return axios({
         url: "/external/igdb/screenshots",
         method: 'POST',
-        data: {
-            screenshotData
-        }
+        data
     })
     .then(response => {
         console.log(response.data);

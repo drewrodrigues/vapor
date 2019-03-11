@@ -1,6 +1,10 @@
 const express = require('express')
 const app     = express()
 
+// middleware -----------------------------------------------------------------
+const morgan = require('morgan')
+app.use(morgan('dev'))
+
 // database -------------------------------------------------------------------
 // - setup
 const db       = require('./config/keys').mongoURI
@@ -16,14 +20,15 @@ mongoose
 // - setup
 const bodyParser = require('body-parser')
 const passport   = require('passport')
-const users      = require('./routes/api/users')
+const auth       = require('./routes/api/auth')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(passport.initialize())
+app.use(passport.session())
 require('./config/passport')(passport)
 app.use(bodyParser.json())
 
 // - routes
-app.use('/api/users', users)
+app.use('/api/auth', auth)
 
 // server ---------------------------------------------------------------------
 // - setup

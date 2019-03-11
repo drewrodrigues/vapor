@@ -11,7 +11,6 @@ router.get('/steam', passport.authenticate('steam'))
 // once authenticated, sign in & redirect to dashboard
 router.get('/steam/return', passport.authenticate('steam'), (req, res) => {
   signInUser(req.user, res)
-  res.redirect("http://localhost:3000/dashboard")
 })
 
 // get current user
@@ -30,10 +29,7 @@ const signInUser = (user, res) => {
     keys.secretOrKey,
     { expiresIn: 3600 }, // 1 hour
     (err, token) => {
-      res.json({
-        success: true,
-        token: "Bearer " + token
-      })
+      res.redirect("http://localhost:3000?token=" + "Bearer " + token)
     }
   )
 }

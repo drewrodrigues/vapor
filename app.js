@@ -5,6 +5,9 @@ const app     = express()
 const morgan = require('morgan')
 app.use(morgan('dev'))
 
+var cors = require('cors');
+app.use(cors());
+
 // database -------------------------------------------------------------------
 // - setup
 const db       = require('./config/keys').mongoURI

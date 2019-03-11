@@ -3,4 +3,4 @@
 # Client
 /client/node_modules
 /client/build
-keys.js
+keysDev.js

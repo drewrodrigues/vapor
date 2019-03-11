@@ -29,7 +29,7 @@ class Navbar extends React.Component {
     } else {
       return (
         <div>
-          <a href="http://localhost:5000/api/auth/steam"> {/* FIXME: proxy not working */}
+          <a href="/api/auth/steam"> {/* FIXME: proxy not working */}
             <img src={ SteamSignInButtom } alt="Sign in through steam" className="navbar-signin"/>
           </a>
         </div>

@@ -31,6 +31,7 @@ export const getScreenshots = gameId => {
         }
     })
     .then(response => {
+        console.log(response.data);
         return response.data;
     });
 };

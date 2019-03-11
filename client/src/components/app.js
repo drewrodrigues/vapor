@@ -1,32 +1,38 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-=======
-import logo from '../assets/logo.svg';
-import '../stylesheets/app.css';
-import { Route, Switch, withRouter } from 'react-router-dom'
 import queryString from 'query-string'
+import "../stylesheets/application.scss"
+import { connect } from 'react-redux'
+import { login } from '../actions/sessionActions'
+import { ProtectedRoute } from '../util/routeUtil'
+import { Route, Switch, withRouter } from 'react-router-dom'
+
+import Dashboard from './dashboard'
 import Landing from './landing'
->>>>>>> Bootstrap steam login when componentWillMount
+import Navbar from './navbar'
 
 class App extends Component {
   componentWillMount() {
     const query = queryString.parse(this.props.location.search);
     if (query.token) {
-      window.localStorage.setItem("jwt", query.token);
-      this.props.history.push("/");
+      this.props.login(query.token)
+      this.props.history.push("/")
     }
   }
 
   render() {
     return (
       <div>
-        <a href="http://localhost:5000/api/auth/steam">Login with steam</a>
+        <Navbar />
         <Switch>
+          <ProtectedRoute path="/dashboard" component={ Dashboard } />
           <Route path="/" component={ Landing } />
         </Switch>
       </div>
-    );
+    )
   }
 }
 
-export default withRouter(App);
+export default withRouter(connect(
+  null,
+  { login }
+)(App))

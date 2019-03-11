@@ -5,21 +5,16 @@ const jwt      = require('jsonwebtoken')
 const keys     = require('../../config/keys')
 const passport = require('passport')
 
-router.post('/login', (req, res) => {
-  User.findOne({ steamId: req.body.steamId })
-    .then(user => {
-      if (user) {
-        signInUser(user, res)
-      } else {
-        const newUser = new User({ steamId: req.body.steamId })
-        newUser.save()
-          .then(user => signInUser(user, res))
-          .catch(err => res.json(err))
-      }
-    })
+// redirect to steam to authenticate
+router.get('/steam', passport.authenticate('steam'))
+
+// once authenticated, sign in & redirect to dashboard
+router.get('/steam/return', passport.authenticate('steam'), (req, res) => {
+  signInUser(req.user, res)
 })
 
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+// get current user
+router.get('/current', passport.authenticate('jwt'), (req, res) => {
   res.json({
     id: req.user.id,
     steamId: req.user.steamId
@@ -34,10 +29,7 @@ const signInUser = (user, res) => {
     keys.secretOrKey,
     { expiresIn: 3600 }, // 1 hour
     (err, token) => {
-      res.json({
-        success: true,
-        token: "Bearer " + token
-      })
+      res.redirect("http://localhost:3000?token=" + "Bearer " + token)
     }
   )
 }

@@ -11,6 +11,10 @@ import * as API from './util/game_api_util'
 
 import Root from './components/root';
 
+import steamSpy from './data/steamspy.json';
+import steamApps from './data/data.json';
+import * as API from './util/game_api_util'
+
 document.addEventListener('DOMContentLoaded', () => {
     let store;
     if (localStorage.jwt) {
@@ -32,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={ store }/>, root);
 });
+
+window.steamSpy = steamSpy
+window.steamApps = steamApps
+window.API = API
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

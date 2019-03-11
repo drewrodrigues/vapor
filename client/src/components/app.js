@@ -10,6 +10,7 @@ import Dashboard from './dashboard'
 import Landing from './landing'
 import Navbar from './navbar'
 
+import Searchbar from './search/searchbar'
 class App extends Component {
   componentWillMount() {
     const query = queryString.parse(this.props.location.search);

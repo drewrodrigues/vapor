@@ -25,6 +25,8 @@ const bodyParser = require('body-parser')
 const passport   = require('passport')
 const auth       = require('./routes/api/auth')
 const igdb       = require('./routes/external/igdb')
+const steam      = require('./routes/external/steam')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -34,6 +36,7 @@ app.use(bodyParser.json())
 // - routes
 app.use('/api/auth', auth)
 app.use('/external/igdb', igdb)
+app.use('/external/steam', steam)
 
 // server ---------------------------------------------------------------------
 // - setup

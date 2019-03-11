@@ -3,17 +3,21 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import '../../stylesheets/searchbar.scss';
 import steamGames from '../../data/data.json';
+import steamSpy from '../../data/steamspy.json'
 
 const getSuggestions = value => {
     steamGames = steamGames.applist.apps.app;
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 
-    return inputLength === 0 ? [] : (steamGames.filter(game => 
-        game.name.toLowerCase().slice(0,inputLength) === inputValue
-        ).sort((a,b)=>{
-            return a.name.length - b.name.length || a.name.localeCompare(b.name);
-        }).slice(0,50))
+    if(inputLength === 0) {
+        return []
+    } else {
+        return steamGames
+            .filter(game => steamSpy[game.appid])
+            .filter(game => game.name.toLowerCase().includes(inputValue))
+            .slice(0,50)
+    }
 };
 
 const getSuggestionValue = suggestion => {
@@ -36,18 +40,26 @@ class Searchbar extends React.Component{
         };
     }
     
-    onChange = (event, { newValue }) => {
-        if(typeof newValue === "string"){
-            this.setState({
-                value: newValue,
-            });
+    onChange = (event, { newValue, method }) => {
+        if(method === "enter"){
         } else {
-            this.setState({
-                value: newValue.name,
-                gameId: newValue.appid
-            })
+            if(typeof newValue === "string"){
+                this.setState({
+                    value: newValue,
+                });
+            } else {
+                this.setState({
+                    value: newValue.name,
+                    gameId: newValue.appid
+                })
+            }
         }
     };
+
+    handleSubmit = e => {
+        e.preventDefault()
+        this.setState({ value: ""})
+    }
     
     onSuggestionsFetchRequested = ({ value }) => {
         let suggestions = getSuggestions(value)
@@ -73,7 +85,7 @@ class Searchbar extends React.Component{
         }
 
         return (
-            <div className="searchbar">
+            <form onSubmit={this.handleSubmit} className="searchbar">
                 <Autosuggest 
                    suggestions={suggestions}
                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -81,9 +93,10 @@ class Searchbar extends React.Component{
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}
                    inputProps={inputProps}
+                   highlightFirstSuggestion={true}
                 
                 />
-            </div>
+            </form>
         );
     }
 }

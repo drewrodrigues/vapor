@@ -3,6 +3,8 @@ import logo from '../assets/logo.svg';
 import '../stylesheets/app.css';
 
 import Searchbar from './search/searchbar'
+
+import * as API from '../util/game_api_util'
 class App extends Component {
   render() {
     return (
@@ -26,5 +28,5 @@ class App extends Component {
     );
   }
 }
-
+window.scrapeGames = API.scrapeGames
 export default App;

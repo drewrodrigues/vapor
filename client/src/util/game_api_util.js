@@ -19,3 +19,18 @@ export const scrapeGames = () => {
             console.error(err);
         });
 }
+
+export const getScreenshots = gameId => {
+    let screenshotData = `fields *; where game = ${gameId};`;
+
+    return axios({
+        url: "/external/igdb/screenshots",
+        method: 'POST',
+        data: {
+            screenshotData
+        }
+    })
+    .then(response => {
+        return response.data;
+    });
+};

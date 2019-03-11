@@ -7,6 +7,8 @@ import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/sessionUtil'
 import { logout } from './actions/sessionActions'
 
+import * as API from './util/game_api_util'
+
 import Root from './components/root';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         store = configureStore({})
     }
     
+    window.API = API;
+
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={ store }/>, root);
 });

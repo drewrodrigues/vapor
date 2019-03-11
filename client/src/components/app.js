@@ -10,7 +10,6 @@ import Dashboard from './dashboard'
 import Landing from './landing'
 import Navbar from './navbar'
 
-import Searchbar from './search/searchbar'
 
 import * as API from '../util/game_api_util'
 class App extends Component {

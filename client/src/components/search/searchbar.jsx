@@ -52,7 +52,6 @@ class Searchbar extends React.Component{
     onSuggestionsFetchRequested = ({ value }) => {
         let suggestions = getSuggestions(value)
         suggestions = suggestions
-        debugger
         this.setState({
             suggestions: suggestions
         });

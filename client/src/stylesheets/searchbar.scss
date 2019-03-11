@@ -44,7 +44,7 @@
     z-index: 2;
 
     overflow-y: scroll;
-    height: 300px;
+    max-height: 300px;
 }
 
 .react-autosuggest__suggestions-list {

@@ -24,7 +24,7 @@ mongoose
 const bodyParser = require('body-parser')
 const passport   = require('passport')
 const auth       = require('./routes/api/auth')
-const igbd       = require('./routes/external/igdb')
+const igdb       = require('./routes/external/igdb')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -33,7 +33,7 @@ app.use(bodyParser.json())
 
 // - routes
 app.use('/api/auth', auth)
-app.use('/external/igdb', igbd)
+app.use('/external/igdb', igdb)
 
 // server ---------------------------------------------------------------------
 // - setup

@@ -2,7 +2,7 @@ import React from 'react';
 import { PieChart, Pie, Cell } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 
-class Searchbar extends React.Component{
+class Doughnut extends React.Component{
     constructor(props) {
         super(props)
     }
@@ -37,29 +37,9 @@ class Searchbar extends React.Component{
         };
         
         return (
-            // <PieChart width={300} height={300} >
-            //     <Pie 
-            //         data={[{"name": "Price","value": 60},{"name":"TTB", "value": 10}]} 
-            //         dataKey="value" 
-            //         nameKey="name" 
-            //         cx="50%" 
-            //         cy="50%" 
-            //         innerRadius={50} 
-            //         outerRadius={100}
-            //         label={renderLabel}
-            //         strokeColor="#fffff"
-            //     >
-            //     {
-                
-            //     data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-            //     }
-            //     </Pie>
-            // </PieChart>
-
-
             <Doughnut data={data2}  width={100} height={20}/>
         );
     }
 }
 
-export default Searchbar;
+export default Doughnut;

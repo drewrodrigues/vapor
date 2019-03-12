@@ -35,8 +35,10 @@ router.post('/game', (req, res) => {
   })
     .then(response => {
       const game = response.data[0];
-      game.igdb_id = game.id;
-      delete game.id;
+      if (game){
+        game.igdb_id = game.id;
+        delete game.id;
+      }
       return res.json(game);
     })
     .catch(err => {

@@ -82,8 +82,12 @@ export const getIgdbApp = ({ name }) => {
 };
 
 export const getTTB = id => dispatch => {
-    return GameApiUtil.getTTB(id)
-    .then(res => dispatch(receiveGame(res.data)));
+  return GameApiUtil.getTTB(id).then(
+    res => {
+      return dispatch(receiveGame(res.data))
+    },
+    err => dispatch(receiveGameErrors(err.responseJSON))
+  );
 };
 
 export const getScreenshots = ({ gameIds }) => {

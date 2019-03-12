@@ -8,7 +8,6 @@ const gamesReducer = (state = _nullGame, action) => {
 
   switch (action.type) {
     case RECEIVE_GAME:
-      debugger;
       return Object.assign({}, state, action.game);
     case CLEAR_GAME:
       return _nullGame;

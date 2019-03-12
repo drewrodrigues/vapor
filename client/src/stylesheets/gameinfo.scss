@@ -1,6 +1,7 @@
 .gameInfo {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 
     &>li{
         
@@ -21,7 +22,7 @@
         
     }
     .price{
-
+        background-image: url('../assets//dollar.png')
     }
 
 }

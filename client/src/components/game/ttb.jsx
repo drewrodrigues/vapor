@@ -1,5 +1,4 @@
 import React from 'react';
-import { PieChart, Pie, Cell } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 
 class Doughnut extends React.Component{

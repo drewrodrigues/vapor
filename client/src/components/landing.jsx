@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import Searchbar from './search/searchbar';
 import Screenshot from './bg_screenshot/screenshot';
 
-const Landing = ({ backgroundBool }) => (
+const Landing = ({ backgroundFetched }) => (
   <>
-    {backgroundBool ? <Screenshot /> : null}
+    {backgroundFetched ? <Screenshot /> : null }
     <h2>Landing</h2>
     <Searchbar />
   </>
@@ -13,7 +13,7 @@ const Landing = ({ backgroundBool }) => (
 
 const mapStateToProps = state => {
   return {
-    backgroundBool: state.entities.game.screenshots
+    backgroundFetched: state.ui.backgroundFetched
   };
 };
 

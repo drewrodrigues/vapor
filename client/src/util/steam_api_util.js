@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export const getPlayerAchievements = (steamId, appId) => (
+export const getPlayerGameAchievements = (steamId, appId) => (
     axios({
         method: 'POST',
         url: `/external/steam-user-data/player-achievements`,

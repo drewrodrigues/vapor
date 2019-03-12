@@ -27,8 +27,8 @@ const receiveGameErrors = err => {
 export const getSteamInfo = ({ gameId }) => {
   return dispatch => {
     return GameApiUtil.getSteamApp(gameId).then(
-      steamData => {
-        return dispatch(receiveGame(steamData))},
+      res => {
+        return dispatch(receiveGame(res.data))},
       err => dispatch(receiveGameErrors(err.responseJSON))
     );
   };
@@ -37,15 +37,15 @@ export const getSteamInfo = ({ gameId }) => {
 export const getIgdbInfo = ({ name }) => {
   return dispatch => {
     return GameApiUtil.getIgdbApp(name).then(
-      igdbData => {
-          return dispatch(receiveGame(igdbData))
+      res => {
+          return dispatch(receiveGame(res.data))
         },
       err => dispatch(receiveGameErrors(err.responseJSON))
     );
   };
 };
 
-export const getTTB = id => {
-    return API.getTTB(id)
+export const getTTB = id => dispatch => {
+    return GameApiUtil.getTTB(id)
     .then(res => dispatch(receiveGame(res.data)))
 }

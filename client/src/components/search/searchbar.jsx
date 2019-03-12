@@ -19,6 +19,7 @@ const getSuggestions = value => {
         return steamGames
             .filter(game => steamSpy[game.appid])
             .filter(game => game.name.toLowerCase().includes(inputValue))
+            .sort((a,b) => a.name.length - b.name.length)
             .slice(0,50);
     }
 };
@@ -45,7 +46,6 @@ class Searchbar extends React.Component{
     
     onChange = (event, { newValue, method }) => {
         if(method === "enter" || method === "click"){
-            debugger;
             this.setState({ 
                 value: newValue.name,
                 appid: 10

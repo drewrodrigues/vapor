@@ -1,4 +1,4 @@
-import {getPlayerGameAchievements, getOwnedGames} from '../actions';
+import {getPlayerGameAchievements, getOwnedGames} from '../actions/steamUserDataActions';
 import {combineReducers} from 'redux';
 
 const steamUserDataReducer = combineReducers(

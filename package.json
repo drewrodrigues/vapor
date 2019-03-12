@@ -6,8 +6,10 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev:debug": "concurrently \"npm run server:inspect\" \"npm run client\"",
     "start": "node app.js",
     "server": "nodemon app.js",
+    "server:inspect": "nodemon --inspect app.js",
     "server:debug": "DEBUG=express:* nodemon index.js"
   },
   "dependencies": {

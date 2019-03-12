@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     window.API = API;
+    window.getState = store.getState;
+    window.dispatch = store.dispatch;
 
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={ store }/>, root);

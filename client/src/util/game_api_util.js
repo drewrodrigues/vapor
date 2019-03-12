@@ -9,13 +9,12 @@ export const getSteamApp = (id) => (
     })
     .then(response => {
         console.log(response.data);
+        return Object.values(response.data)[0].data;
     })
     .catch(err => {
         console.error(err);
     })
 )
-
-
 
 export const getSteamBG = (id) => (
     axios({
@@ -33,8 +32,8 @@ export const getSteamBG = (id) => (
 // IGDB
 export const getIgdbApp = (name) => {
     let data = `fields *; where name = "${name}";`;
-
-    axios({
+    debugger;
+    return axios({
         url: `/external/igdb/games`,
         method: 'POST',
         data: {
@@ -42,12 +41,14 @@ export const getIgdbApp = (name) => {
         }
     })
     .then(response => {
+        debugger;
         console.log(response.data);
+        return response.data[0];
     })
     .catch(err => {
         console.error(err.error);
-    })
-}
+    });
+};
 
 export const getScreenshots = gameId => {
     let data = `fields *; where game = ${gameId};`;
@@ -55,7 +56,9 @@ export const getScreenshots = gameId => {
     return axios({
         url: "/external/igdb/screenshots",
         method: 'POST',
-        data
+        data: {
+            data
+        }
     })
     .then(response => {
         console.log(response.data);

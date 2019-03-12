@@ -7,7 +7,7 @@ import { ProtectedRoute } from '../util/routeUtil'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 import Dashboard from './dashboard'
-import Landing from './landing'
+import LandingContainer from './landing'
 import Navbar from './navbar'
 
 
@@ -27,7 +27,7 @@ class App extends Component {
         <Navbar />
         <Switch>
           <ProtectedRoute path="/dashboard" component={ Dashboard } />
-          <Route path="/" component={ Landing } />
+          <Route path="/" component={ LandingContainer } />
         </Switch>
       </div>
     )

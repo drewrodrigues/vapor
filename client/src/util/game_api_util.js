@@ -9,7 +9,7 @@ export const getSteamApp = (id) => (
     })
     .then(response => {
         console.log(response.data);
-        return Object.values(response.data)[0].data;
+        return response.data;
     })
     .catch(err => {
         console.error(err);
@@ -43,7 +43,7 @@ export const getIgdbApp = (name) => {
     .then(response => {
         debugger;
         console.log(response.data);
-        return response.data[0];
+        return response.data;
     })
     .catch(err => {
         console.error(err.error);

@@ -11,7 +11,6 @@ export const clearGame = () => {
 };
 
 const receiveGame = game => {
-  debugger;
   return {
     type: RECEIVE_GAME,
     game
@@ -29,7 +28,6 @@ export const getSteamInfo = ({ gameId }) => {
   return dispatch => {
     return GameApiUtil.getSteamApp(gameId).then(
       steamData => {
-        debugger;
         return dispatch(receiveGame(steamData))},
       err => dispatch(receiveGameErrors(err.responseJSON))
     );
@@ -37,11 +35,9 @@ export const getSteamInfo = ({ gameId }) => {
 };
 
 export const getIgdbInfo = ({ name }) => {
-  debugger;
   return dispatch => {
     return GameApiUtil.getIgdbApp(name).then(
       igdbData => {
-          debugger;
           return dispatch(receiveGame(igdbData))
         },
       err => dispatch(receiveGameErrors(err.responseJSON))

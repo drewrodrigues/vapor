@@ -44,17 +44,18 @@ class Searchbar extends React.Component{
     }
     
     onChange = (event, { newValue, method }) => {
-        if(method === "enter"){
-        } else {
-            if(typeof newValue === "string"){
-                this.setState({
-                    value: newValue,
-                });
-            } else {
-                this.props.clearGame();
-                this.props.getSteamInfo({gameId: newValue.appid});
-                this.props.getIgdbInfo({name: newValue.name});
-            }
+        if(method === "enter" || method === "click"){
+            debugger;
+            this.setState({ 
+                value: newValue.name,
+                appid: 10
+            });
+            this.props.clearGame();
+            this.props.getIgdbInfo({ name: newValue.name }); 
+            this.props.getSteamInfo({ gameId: newValue.appid });
+        } 
+        else if (method === "type"){
+            this.setState({ value: newValue });
         }
     };
 
@@ -105,7 +106,7 @@ class Searchbar extends React.Component{
 
 const mapStateToProps = state => {
     return {
-
+        
     };
 };
 

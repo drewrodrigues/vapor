@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Screenshot = ({ screenshots }) => {
-  const randScreenshot = screenshots[Math.floor(Math.random() * screenshots.length)];
-  const imageId = randScreenshot.image_id;
-
+const Screenshot = ({ screenshot, altName }) => {
   return (
     <div className="bg-screenshot">
       <img position="fixed"
            max-height="100%"
            max-width="100%"
            z-index="-1"
-           src={`https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`} />
+           src={screenshot}
+           alt={altName} />
     </div>
   )
 }
 
 const mapStateToProps = state => {
+  const screenshots = state.entities.game.screenshots;
   return {
-    screenshot: Object.values(state.entities.game.screenshots)
+    screenshot: screenshots[Math.floor(Math.random() * screenshots.length)].path_full,
+    altName: state.entities.game.name
   };
 };
 

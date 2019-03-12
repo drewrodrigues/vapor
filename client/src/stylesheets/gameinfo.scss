@@ -1,0 +1,36 @@
+.gameInfo {
+    display: flex;
+    flex-direction: row;
+
+    &>li{
+        
+    }
+
+    .igdbScore{
+        background-image: url('../assets//igdb.png')
+
+    }
+    .metacriticScore{
+        background-image: url('../assets//metacritic.png')
+
+
+    }
+    .recommendations{
+        background-image: url('../assets//steam.png')
+
+        
+    }
+    .price{
+
+    }
+
+}
+
+.icon {
+    height: 64px;
+    width: 64px;
+}
+
+.none {
+    opacity: .2;
+}

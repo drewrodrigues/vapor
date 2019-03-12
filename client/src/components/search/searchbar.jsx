@@ -51,8 +51,9 @@ class Searchbar extends React.Component{
                 appid: 10
             });
             this.props.clearGame();
-            this.props.getIgdbInfo({ name: newValue.name }); 
-            this.props.getSteamInfo({ gameId: newValue.appid });
+            this.props.getSteamInfo({ gameId: newValue.appid })
+            .then( () => this.props.getIgdbInfo({ name: newValue.name })
+            );
         } 
         else if (method === "type"){
             this.setState({ value: newValue });

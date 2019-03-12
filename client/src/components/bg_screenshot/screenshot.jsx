@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 const Screenshot = ({ screenshot, altName }) => {
   return (
     <div className="bg-screenshot">
-      <img position="fixed"
-           max-height="100%"
-           max-width="100%"
-           z-index="-1"
-           src={screenshot}
+      <img src={screenshot}
            alt={altName} />
     </div>
   )

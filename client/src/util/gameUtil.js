@@ -18,7 +18,7 @@ export const getSteamBG = (id) => (
 
 // IGDB
 export const getIgdbApp = (name) => {
-    let data = `fields *; where name = "${name}";`;
+    let data = `fields id, popularity, pulse_count, aggregated_rating, aggregated_rating_count, similar_games; where name = "${name}";`;
     return axios({
         url: `/external/igdb/games`,
         method: 'POST',

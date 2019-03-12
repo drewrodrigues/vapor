@@ -33,15 +33,9 @@ router.post('/games', (req, res) => {
   })
     .then(response => {
       const game = response.data[0];
-      const data = {
-        igdb_id: game.id,
-        popularity: game.popularity,
-        pulse_count: game.pulse_count,
-        total_rating_count: game.total_rating_count,
-        total_rating: game.total_rating,
-        similar_games: game.similar_games,
-      };
-      return res.json(data);
+      game.igdb_id = game.id;
+      delete game.id
+      return res.json(game);
     })
     .catch(err => {
       console.error(err);

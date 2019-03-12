@@ -4,7 +4,8 @@ import entitiesReducer from './entitiesReducer';
 
 const RootReducer = combineReducers({
   session: sessionsReducer,
-  entities: entitiesReducer
+  entities: entitiesReducer,
+  steamUserData: steamUserDataReducer,
 });
 
 export default RootReducer;

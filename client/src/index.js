@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './stylesheets/application.scss';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/store';
-import jwt_decode from 'jwt-decode'
-import { setAuthToken } from './util/sessionUtil'
-import { logout } from './actions/sessionActions'
+import jwt_decode from 'jwt-decode';
+import { setAuthToken } from './util/sessionUtil';
+import { logout } from './actions/sessionActions';
 
 import Root from './components/root';
 
@@ -16,17 +16,17 @@ import * as API from './util/game_api_util'
 document.addEventListener('DOMContentLoaded', () => {
     let store;
     if (localStorage.jwt) {
-        setAuthToken(localStorage.jwt)
-        const decodedUser = jwt_decode(localStorage.jwt)
-        const preloadedState = { session: { isAuthenticated: true, user: decodedUser } }
-        store = configureStore(preloadedState)
-        const currentTime = Date.now() / 1000
+        setAuthToken(localStorage.jwt);
+        const decodedUser = jwt_decode(localStorage.jwt);
+        const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
+        store = configureStore(preloadedState);
+        const currentTime = Date.now() / 1000;
         if (decodedUser.exp < currentTime) {
-            store.dispatch(logout())
-            window.location.href = "/"
+            store.dispatch(logout());
+            window.location.href = "/";
         }
     } else {
-        store = configureStore({})
+        store = configureStore({});
     }
     
     window.API = API;

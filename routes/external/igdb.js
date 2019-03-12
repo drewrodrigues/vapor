@@ -55,13 +55,24 @@ router.post('/ttb', (req, res) => {
   .then(response => {
     const { data } = response;
     let normally = 0;
+    let normally_count = 0;
     let completely = 0;
+    let completely_count = 0;
     let hastily = 0;
+    let hastily_count = 0;
     data.forEach(el => {
-      el.normally ? normally =  (normally + el.normally )/2: '';
-      el.completely ? completely = (completely + el.completely )/2 : '';
-      el.hastily ? hastily = (hastily + el.hastily )/2 : '';
+      el.normally ? normally =  normally + el.normally : '';
+      el.completely ? completely = completely + el.completely  : '';
+      el.hastily ? hastily = hastily + el.hastily  : '';
+
+      el.normally ? normally_count++: '';
+      el.completely ?  completely_count++  : '';
+      el.hastily ? hastily_count++  : '';
     });
+
+    normally=normally/normally_count;
+    completely=completely/completely_count;
+    hastily=hastily/hastily_count;
 
     return res.json({normally, completely, hastily});
   })

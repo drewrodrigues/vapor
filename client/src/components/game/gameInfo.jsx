@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 class GameInfo extends React.Component{
     constructor(props) {
@@ -30,14 +29,5 @@ class GameInfo extends React.Component{
     }
 }
 
-const mSP = state => ({
-    aggregate: state.entities.game.aggregated_rating,
-    metacritic: state.entities.game.metacritic,
-    price_overview:  state.entities.game.price_overview,
-    recommendations: state.entities.game.recommendations
-})
-const mDP = dispatch => ({
-    
-})
 
-export default connect(mSP, mDP)(GameInfo);
+export default GameInfo;

@@ -8,7 +8,6 @@ import { setAuthToken } from './util/sessionUtil';
 import { logout } from './actions/sessionActions';
 
 import Root from './components/root';
-import * as apiUtil from './util/steam_api_util';
 
 import steamSpy from './data/steamspy.json';
 import steamApps from './data/data.json';

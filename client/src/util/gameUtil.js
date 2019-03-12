@@ -18,15 +18,30 @@ export const getSteamBG = (id) => (
 
 // IGDB
 export const getIgdbApp = (name) => {
-    let data = `fields id, popularity, pulse_count, aggregated_rating, aggregated_rating_count, similar_games; where name = "${name}";`;
+    let data = `fields id, popularity, pulse_count, \
+                aggregated_rating, aggregated_rating_count, \
+                similar_games; where name = "${name}";`;
+    return axios({
+        url: `/external/igdb/game`,
+        method: 'POST',
+        data: {
+            data
+        }
+    });
+};
+
+export const getIgdbApps = (gameIds) => {
+    let data = `fields id, popularity, pulse_count, \
+                aggregated_rating, aggregated_rating_count, \
+                similar_games; where id = (${gameIds.join(", ")});`;
     return axios({
         url: `/external/igdb/games`,
         method: 'POST',
         data: {
             data
         }
-    })
-}
+    });
+};
 
 export const getTTB = (id) => {
     let data = `fields *; where id = ${id};`;
@@ -37,11 +52,11 @@ export const getTTB = (id) => {
         data: {
             data
         }
-    })
-}
+    });
+};
 
-export const getScreenshots = gameId => {
-    let data = `fields *; where game = ${gameId};`;
+export const getScreenshots = gameIds => {
+    let data = `fields *; where game = (${gameIds.join(", ")});`;
 
     return axios({
         url: "/external/igdb/screenshots",
@@ -49,5 +64,5 @@ export const getScreenshots = gameId => {
         data: {
             data
         }
-    })
+    });
 };

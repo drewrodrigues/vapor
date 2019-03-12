@@ -11,8 +11,6 @@ const gamesReducer = (state = _nullGame, action) => {
       return Object.assign({}, state, action.game);
     case CLEAR_GAME:
       return _nullGame;
-    // case RECEIVE_SCREENSHOT:
-    //   return Object.assign({}, state, {[action.screenshot.game]: action.screenshot});
     default:
       return state;
   }

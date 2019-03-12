@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { getSteamInfo, clearGame, getIgdbInfo } from '../../actions/gamesActions';
 
 import Autosuggest from 'react-autosuggest';
 import '../../stylesheets/searchbar.scss';
 import steamGames from '../../data/data.json';
-import steamSpy from '../../data/steamspy.json'
+import steamSpy from '../../data/steamspy.json';
 
 const getSuggestions = value => {
     steamGames = steamGames.applist.apps.app;
@@ -11,17 +14,17 @@ const getSuggestions = value => {
     const inputLength = inputValue.length;
 
     if(inputLength === 0) {
-        return []
+        return [];
     } else {
         return steamGames
             .filter(game => steamSpy[game.appid])
             .filter(game => game.name.toLowerCase().includes(inputValue))
-            .slice(0,50)
+            .slice(0,50);
     }
 };
 
 const getSuggestionValue = suggestion => {
-    return suggestion
+    return suggestion;
 };
 
 const renderSuggestion = suggestion => (
@@ -41,18 +44,18 @@ class Searchbar extends React.Component{
     }
     
     onChange = (event, { newValue, method }) => {
-        if(method === "enter"){
-        } else {
-            if(typeof newValue === "string"){
-                this.setState({
-                    value: newValue,
-                });
-            } else {
-                this.setState({
-                    value: newValue.name,
-                    gameId: newValue.appid
-                })
-            }
+        if(method === "enter" || method === "click"){
+            debugger;
+            this.setState({ 
+                value: newValue.name,
+                appid: 10
+            });
+            this.props.clearGame();
+            this.props.getIgdbInfo({ name: newValue.name }); 
+            this.props.getSteamInfo({ gameId: newValue.appid });
+        } 
+        else if (method === "type"){
+            this.setState({ value: newValue });
         }
     };
 
@@ -101,5 +104,19 @@ class Searchbar extends React.Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getSteamInfo: gameId => dispatch(getSteamInfo(gameId)),
+        getIgdbInfo: name => dispatch(getIgdbInfo(name)),
+        clearGame: () => dispatch(clearGame())
+    }
+}
+
 window.steamGames = steamGames;
-export default Searchbar;
+export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);

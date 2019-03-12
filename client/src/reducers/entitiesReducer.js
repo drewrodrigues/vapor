@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import gamesReducer from './gamesReducer'
 
 const entitiesReducer = combineReducers({
-  games: gamesReducer
+  game: gamesReducer
 });
 
 export default entitiesReducer;

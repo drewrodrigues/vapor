@@ -8,6 +8,9 @@ class GameInfoItem extends React.Component{
     render() {
         
         return (
+            <li>
+                
+            </li>
         );
     }
 }

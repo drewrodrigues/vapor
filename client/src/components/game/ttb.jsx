@@ -1,44 +1,77 @@
-import React from 'react';
-import {Doughnut} from 'react-chartjs-2';
+import React from "react";
+import { Pie } from "react-chartjs-2";
+import { connect } from "react-redux";
+import { getTTB } from "../../actions/gamesActions";
 
-class Doughnut extends React.Component{
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        const COLORS = ['#0088FE', '#00C49F'];
-        const data=[{angle: 5}, {angle: 2}]
-        const renderLabel = ({ name }) => {
-            return (
-              name
-            );
-          };
+class TTB extends React.Component {
+  constructor(props) {
+    super(props);
 
-          const data2 = {
-            labels: [
-                'Red',
-                'Green',
-                'Yellow'
-            ],
-            datasets: [{
-                data: [300, 50, 100],
-                backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
-                ],
-                hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
-                ]
-            }]
-        };
-        
-        return (
-            <Doughnut data={data2}  width={100} height={20}/>
-        );
+    this.state = {
+      normally: null,
+      completely: null,
+      hastily: null
+    };
+  }
+
+  componentDidMount() {
+    this.props
+      .getTTB(this.props.game.igdb_id)
+      .then(res => this.setState(res.game));
+  }
+  render() {
+    const { normally, completely, hastily } = this.state
+    const { game } = this.props;
+    const COLORS = ["#0088FE", "#00C49F"];
+    const renderLabel = ({ name }) => {
+      return name;
+    };
+
+    const data = {
+      labels: ["Normal","Complete","Hastily", "Price"],
+      datasets: []
+    };
+    if (normally){
+      data.datasets.push({
+        data: [Math.round(this.state.normally/60/60), 0,0, Math.round(game.price_overview.final/100)],
+        backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF6384",,"#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
+      })
     }
+
+    if (completely){
+      data.datasets.push({
+        data: [0,Math.round(this.state.completely/60/60),0, Math.round(game.price_overview.final/100)],
+        backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
+      })
+    }
+
+    if (hastily){
+      data.datasets.push({
+        data: [0,0,Math.round(this.state.hastily/60/60), Math.round(game.price_overview.final/100)],
+        backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
+      })
+    }
+
+
+
+    return normally || completely || hastily ? (
+      <Pie data={data} width={100} height={20} />
+    ) : null;
+  }
 }
 
-export default Doughnut;
+const mSP = state => ({
+  price: state.entities.game.price_overview,
+  ttb: state.entities.game
+});
+const mDP = dispatch => ({
+  getTTB: id => dispatch(getTTB(id))
+});
+
+export default connect(
+  mSP,
+  mDP
+)(TTB);

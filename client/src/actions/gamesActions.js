@@ -1,4 +1,4 @@
-import * as GameApiUtil from '../util/game_api_util';
+import * as GameApiUtil from '../util/gameUtil';
 
 export const RECEIVE_GAME = "RECEIVE_GAME";
 export const RECEIVE_GAME_ERRORS = "RECEIVE_GAME_ERRORS";

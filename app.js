@@ -26,7 +26,6 @@ const passport   = require('passport')
 const auth       = require('./routes/api/auth')
 const igdb       = require('./routes/external/igdb')
 const steam      = require('./routes/external/steam')
-const steamUserData = require('./routes/external/steam-user-data');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(passport.initialize())
@@ -38,7 +37,6 @@ app.use(bodyParser.json())
 app.use('/api/auth', auth)
 app.use('/external/igdb', igdb)
 app.use('/external/steam', steam)
-app.use('/external/steam-user-data', steamUserData);
 
 // server ---------------------------------------------------------------------
 // - setup

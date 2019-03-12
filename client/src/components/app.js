@@ -10,8 +10,6 @@ import Dashboard from './dashboard'
 import LandingContainer from './landing'
 import Navbar from './navbar'
 
-
-import * as API from '../util/game_api_util'
 class App extends Component {
   componentWillMount() {
     const query = queryString.parse(this.props.location.search);

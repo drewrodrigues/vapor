@@ -1,4 +1,4 @@
-import * as steamApiUtil from '../util/steam_api_util';
+import * as steamApiUtil from '../util/userDatumUtil';
 
 export const RECEIVE_PLAYER_GAME_ACHIEVEMENTS = "RECEIVE_PLAYER_GAME_ACHIEVEMENTS";
 export const RECEIVE_OWNED_GAMES = "RECEIVE_OWNED_GAMES";

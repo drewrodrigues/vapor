@@ -11,7 +11,7 @@ import Root from './components/root';
 
 import steamSpy from './data/steamspy.json';
 import steamApps from './data/data.json';
-import * as API from './util/game_api_util'
+import * as API from './util/gameUtil'
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;

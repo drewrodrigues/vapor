@@ -20,7 +20,6 @@ export const getSteamBG = (id) => (
 export const getIgdbApp = (name) => {
 
     const sani_name = name.replace(/[^0-9a-z\s]/gi,'').replace(/\s\s+/g, ' ').toLowerCase().split(" ").join("-")
-    debugger
     let data = `fields id, popularity, pulse_count, \
                 aggregated_rating, aggregated_rating_count, \
                 similar_games; where slug = "${sani_name}";`;

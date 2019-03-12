@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
                 name: game.name,
                 release_date: game.release_date,
                 steam_id: game.steam_appid,
-                recommendations: game.recommendations.total
+                recommendations: game.recommendations
             }
             res.json(data)
         })

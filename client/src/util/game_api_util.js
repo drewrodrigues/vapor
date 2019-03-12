@@ -7,13 +7,6 @@ export const getSteamApp = (id) => (
         url: `/external/steam/${id}`,
         method: 'GET'
     })
-    .then(response => {
-        console.log(response.data);
-        return response.data;
-    })
-    .catch(err => {
-        console.error(err);
-    })
 )
 
 export const getSteamBG = (id) => (
@@ -21,18 +14,11 @@ export const getSteamBG = (id) => (
         url: `/external/steam/${id}/bg`,
         method: 'GET'
     })
-    .then(response => {
-        console.log(response.data);
-    })
-    .catch(err => {
-        console.error(err);
-    })
 )
 
 // IGDB
 export const getIgdbApp = (name) => {
     let data = `fields *; where name = "${name}";`;
-    debugger;
     return axios({
         url: `/external/igdb/games`,
         method: 'POST',
@@ -40,15 +26,19 @@ export const getIgdbApp = (name) => {
             data
         }
     })
-    .then(response => {
-        debugger;
-        console.log(response.data);
-        return response.data;
+}
+
+export const getTTB = (id) => {
+    let data = `fields *; where id = ${id};`;
+
+    return axios({
+        url: `/external/igdb/ttb`,
+        method: 'POST',
+        data: {
+            data
+        }
     })
-    .catch(err => {
-        console.error(err.error);
-    });
-};
+}
 
 export const getScreenshots = gameId => {
     let data = `fields *; where game = ${gameId};`;
@@ -60,8 +50,4 @@ export const getScreenshots = gameId => {
             data
         }
     })
-    .then(response => {
-        console.log(response.data);
-        return response.data;
-    });
 };

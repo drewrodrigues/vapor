@@ -44,3 +44,8 @@ export const getIgdbInfo = ({ name }) => {
     );
   };
 };
+
+export const getTTB = id => {
+    return API.getTTB(id)
+    .then(res => dispatch(receiveGame(res.data)))
+}

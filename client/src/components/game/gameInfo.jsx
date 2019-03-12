@@ -23,7 +23,7 @@ class GameInfo extends React.Component{
                                     <li><div className="recommendations none icon"></div><p></p></li>)}
                 <li>
                     <div className="price icon"></div>
-                    <p>{price_overview.final_formatted}</p>
+                    <p>{price_overview ? price_overview.final_formatted : "Free"}</p>
                 </li>
             </ul>
         );

@@ -8,8 +8,8 @@ const similarGamesScreenshotsReducer = (state = _nullScreenshots, action) => {
   switch (action.type) {
     case RECEIVE_SCREENSHOTS:
       let screenshots = {};
-      action.screenshots.forEach(screenshot => {
-        screenshots[screenshot.igdb_id] = screenshot;
+      action.screenshots.data.forEach(screenshot => {
+        screenshots[screenshot.game] = screenshot;
       });
       return Object.assign({}, state, screenshots);
     case CLEAR_SCREENSHOTS:

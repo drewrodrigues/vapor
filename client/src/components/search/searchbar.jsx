@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getSteamInfo, clearGame, getIgdbInfo } from '../../actions/gamesActions';
+import { getSteamApp, clearGame, getIgdbApp, clearGames,
+         getIgdbApps, getScreenshots, clearScreenshots } from '../../actions/gamesActions';
 
 import Autosuggest from 'react-autosuggest';
 import '../../stylesheets/searchbar.scss';
@@ -51,8 +52,19 @@ class Searchbar extends React.Component{
                 appid: 10
             });
             this.props.clearGame();
-            this.props.getIgdbInfo({ name: newValue.name }); 
-            this.props.getSteamInfo({ gameId: newValue.appid });
+            this.props.clearGames();
+            this.props.clearScreenshots();
+            this.props.getSteamApp({ gameId: newValue.appid }).then(
+                () => this.props.getIgdbApp({ name: newValue.name })
+            ).then(
+                () => this.props.getIgdbApps({ 
+                    gameIds: this.props.activeGame.similar_games
+                })
+            ).then(
+                () => this.props.getScreenshots({
+                    gameIds: Object.keys(this.props.similarGames)
+                })
+            );
         } 
         else if (method === "type"){
             this.setState({ value: newValue });
@@ -106,15 +118,20 @@ class Searchbar extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        
+        activeGame: state.entities.game,
+        similarGames: state.entities.similarGames
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getSteamInfo: gameId => dispatch(getSteamInfo(gameId)),
-        getIgdbInfo: name => dispatch(getIgdbInfo(name)),
-        clearGame: () => dispatch(clearGame())
+        getSteamApp: gameId => dispatch(getSteamApp(gameId)),
+        getIgdbApp: name => dispatch(getIgdbApp(name)),
+        getIgdbApps: gameIds => dispatch(getIgdbApps(gameIds)),
+        getScreenshots: gameIds => dispatch(getScreenshots(gameIds)),
+        clearGame: () => dispatch(clearGame()),
+        clearGames: () => dispatch(clearGames()),
+        clearScreenshots: () => dispatch(clearScreenshots())
     }
 }
 

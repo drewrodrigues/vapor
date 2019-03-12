@@ -53,7 +53,6 @@ router.post('/games', (req, res) => {
     data: req.body.data
   })
     .then(response => {
-      debugger;
       const games = response.data;
       games.forEach(game => {
         game.igdb_id = game.id;

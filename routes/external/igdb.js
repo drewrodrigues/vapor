@@ -39,8 +39,6 @@ router.post('/games', (req, res) => {
         pulse_count: game.pulse_count,
         total_rating_count: game.total_rating_count,
         total_rating: game.total_rating,
-        rating: game.rating,
-        rating_count: game.rating_count,
         similar_games: game.similar_games,
       };
       return res.json(data);

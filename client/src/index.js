@@ -11,7 +11,8 @@ import Root from './components/root';
 
 import steamSpy from './data/steamspy.json';
 import steamApps from './data/data.json';
-import * as API from './util/gameUtil'
+import * as API from './util/gameUtil';
+import * as actions from './actions/gamesActions';
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.steamSpy = steamSpy
 window.steamApps = steamApps
 window.API = API
+window.actions = actions
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

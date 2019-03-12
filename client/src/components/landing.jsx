@@ -5,12 +5,12 @@ import Screenshot from './bg_screenshot/screenshot';
 import TTB  from '../components/game/ttb'
 import GameInfo from '../components/game/gameInfo'
 
-const Landing = ({ backgroundBool, game }) => {
+const Landing = ({ backgroundFetched, game }) => {
   return (
     <>
       <h2>Landing</h2>
       <Searchbar />
-      {backgroundBool ?(
+      {backgroundFetched ? (
         <> 
           <Screenshot />
           <GameInfo game={game}/>
@@ -28,7 +28,7 @@ const Landing = ({ backgroundBool, game }) => {
 
 const mapStateToProps = state => {
   return {
-    backgroundBool: state.entities.game.screenshots,
+    backgroundFetched: state.ui.backgroundFetched,
     game: state.entities.game
   };
 };

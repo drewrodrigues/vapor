@@ -21,7 +21,7 @@ router.post('/screenshots', (req, res) => {
   });
 });
 
-router.post('/games', (req, res) => {
+router.post('/game', (req, res) => {
   return axios({
     url: `https://api-v3.igdb.com/games`,
     method: 'GET',
@@ -34,8 +34,31 @@ router.post('/games', (req, res) => {
     .then(response => {
       const game = response.data[0];
       game.igdb_id = game.id;
-      delete game.id
+      delete game.id;
       return res.json(game);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
+router.post('/games', (req, res) => {
+  return axios({
+    url: `https://api-v3.igdb.com/games`,
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'user-key': keys.igdbKey
+    },
+    data: req.body.data
+  })
+    .then(response => {
+      const games = response.data;
+      games.forEach(game => {
+        game.igdb_id = game.id;
+        delete game.id;
+      });
+      return res.json(games);
     })
     .catch(err => {
       console.error(err);
@@ -80,7 +103,5 @@ router.post('/ttb', (req, res) => {
     console.error(err);
   });
 });
-  
-  https://api-v3.igdb.com/time_to_beats
 
 module.exports = router;

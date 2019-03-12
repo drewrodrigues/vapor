@@ -19,7 +19,7 @@ export const getSteamBG = (id) => (
 // IGDB
 export const getIgdbApp = (name) => {
     const sani_name = name.replace(/[\u{0080}-\u{FFFF}]/gu, "");
-    let data = `fields id, popularity, pulse_count, \
+    let data = `fields id, popularity, pulse_count, name, \
                 aggregated_rating, aggregated_rating_count, \
                 similar_games; where name = "${sani_name}";`;
     return axios({
@@ -32,7 +32,7 @@ export const getIgdbApp = (name) => {
 };
 
 export const getIgdbApps = (gameIds) => {
-    let data = `fields id, popularity, pulse_count, \
+    let data = `fields id, popularity, pulse_count, name, \
                 aggregated_rating, aggregated_rating_count, \
                 similar_games; where id = (${gameIds.join(", ")});`;
 
@@ -59,7 +59,6 @@ export const getTTB = (id) => {
 
 export const getScreenshots = gameIds => {
     let data = `fields *; where game = (${gameIds.join(", ")});`;
-
     return axios({
         url: "/external/igdb/screenshots",
         method: 'POST',

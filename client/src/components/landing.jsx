@@ -4,6 +4,7 @@ import Searchbar from './search/searchbar';
 import Screenshot from './bg_screenshot/screenshot';
 import TTB  from '../components/game/ttb'
 import GameInfo from '../components/game/gameInfo'
+import SimilarGamesRow from './game/similarGamesRow';
 
 const Landing = ({ backgroundFetched, game }) => {
   return (
@@ -14,6 +15,7 @@ const Landing = ({ backgroundFetched, game }) => {
         <> 
           <Screenshot />
           <GameInfo game={game}/>
+          <SimilarGamesRow />
         </>
       ) : null}
 

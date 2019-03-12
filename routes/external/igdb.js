@@ -4,6 +4,7 @@ const keys = require('../../config/keys');
 const axios = require('axios');
 
 router.post('/screenshots', (req, res) => {
+  debugger;
   return axios({
     url: "https://api-v3.igdb.com/screenshots",
     method: 'POST',
@@ -14,6 +15,7 @@ router.post('/screenshots', (req, res) => {
     data: req.body.data
   })
   .then(response => {
+    debugger;
     return res.json(response.data);
   })
   .catch(err => {

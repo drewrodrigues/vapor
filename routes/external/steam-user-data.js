@@ -9,8 +9,9 @@ router.post('/player-achievements', (req, res) => {
         url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${req.body.appId}&key=${keys.steamAPIKey}&steamid=${req.body.steamId}`,
         method: `GET`,
         // key: keys.steamAPIKey,
-        appid: req.body.gameId,
-        steamid: req.body.steamId
+        // appid: req.body.appId,
+        // steamid: req.body.steamId,
+        format: 'json'
     })
         .then(apiRes => res.json(apiRes.data))
         .catch(err => console.log(err));
@@ -22,9 +23,9 @@ router.post('/owned-games', (req, res) => {
         url: `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${keys.steamAPIKey}&steamid=${req.body.steamId}&format=json`,
         method: `GET`,
         // key: keys.steamAPIKey,
+        include_free_played_games: true,
         steamid: req.body.steamId,
-        format: 'json',
-        include_played_free_game: true
+        format: 'json'
     })
         .then(apiRes => res.json(apiRes.data))
         .catch(err => console.log(err));

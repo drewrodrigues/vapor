@@ -82,6 +82,24 @@ class Searchbar extends React.Component{
                     }
                 }
             ).then(
+                // Need to search for screenshots 3 times in case of missing
+                // screenshots. One of the worst APIs on the planet.
+                () => {
+                    let missingScreenshots = [];
+                    const selectedScreenshots = Object.keys(this.props.similarGamesScreenshots);
+                    const selectedGames = Object.keys(this.props.similarGames);
+                    selectedGames.forEach( gameId => {
+                        if (!selectedScreenshots.includes(gameId)) {
+                            missingScreenshots = missingScreenshots.concat(gameId);
+                        }
+                    })
+                    if (missingScreenshots.length !== 0) {
+                        return this.props.getScreenshots({
+                            gameIds: missingScreenshots
+                        })
+                    }
+                }
+            ).then(
                 () => this.props.renderScreenshots()
             );
         } 

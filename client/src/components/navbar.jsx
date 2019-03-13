@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { logout } from '../actions/sessionActions'
 
 import SteamSignInButtom from '../assets/steam-sign-in.png'
+import Searchbar from './search/searchbar';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Navbar extends React.Component {
   getLinks() {
     if (this.props.loggedIn) {
       return (
-        <div>
+        <div className="session">
           <Link to="/">Search</Link>
           <Link to="/dashboard">Dashboard</Link>
           <button onClick={ this.logoutUser }>Logout</button>
@@ -28,7 +29,7 @@ class Navbar extends React.Component {
       )
     } else {
       return (
-        <div>
+        <div className="session">
           <a href="http://localhost:5000/api/auth/steam"> {/* FIXME: proxy not working */}
             <img src={ SteamSignInButtom } alt="Sign in through steam" className="navbar-signin"/>
           </a>
@@ -39,8 +40,9 @@ class Navbar extends React.Component {
 
   render() {
     return(
-      <nav>
-        <h3>Navbar</h3>
+      <nav className="navbar">
+        <h3 className="vapor-title">Vapor</h3>
+        <Searchbar />
         { this.getLinks() }
       </nav>
     )

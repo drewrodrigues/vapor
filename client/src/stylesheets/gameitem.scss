@@ -1,3 +1,21 @@
 .game-item-wrapper {
-  
+  display: flex;
+  height: 100%;
+
+  .game-item {
+    height: 100%;
+
+    .similar-game-thumb {
+      height: 90%;
+      width: 18vw;
+      padding: 5%;
+      object-fit: contain;
+    }
+
+    .game-title {
+      text-align: center;
+      font-size: 0.75vw;
+      letter-spacing: 1px;
+    }
+  }
 }

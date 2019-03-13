@@ -7,6 +7,7 @@ export const RECEIVE_GAME_ERRORS = "RECEIVE_GAME_ERRORS";
 export const CLEAR_GAME = "CLEAR_GAME";
 export const CLEAR_GAMES = "CLEAR_GAMES";
 export const CLEAR_SCREENSHOTS = "CLEAR_SCREENSHOTS";
+export const RENDER_SCREENSHOTS = "RENDER_SCREENSHOTS";
 
 export const clearGame = () => {
   return {
@@ -51,6 +52,12 @@ const receiveGameErrors = err => {
   return {
     type: RECEIVE_GAME_ERRORS,
     err
+  };
+};
+
+export const renderScreenshots = () => {
+  return {
+    type: RENDER_SCREENSHOTS
   };
 };
 

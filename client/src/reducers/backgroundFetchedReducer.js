@@ -1,4 +1,4 @@
-import { RECEIVE_SCREENSHOTS, CLEAR_SCREENSHOTS } from '../actions/gamesActions';
+import { CLEAR_SCREENSHOTS, RENDER_SCREENSHOTS } from '../actions/gamesActions';
 
 const _nullBackground = false;
 
@@ -8,7 +8,7 @@ const loadingReducer = (state = _nullBackground, action) => {
   switch (action.type) {
     case CLEAR_SCREENSHOTS:
       return _nullBackground;
-    case RECEIVE_SCREENSHOTS:
+    case RENDER_SCREENSHOTS:
       return true;
     default:
       return state;

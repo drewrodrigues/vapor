@@ -18,7 +18,10 @@ export const getSteamBG = (id) => (
 
 // IGDB
 export const getIgdbApp = (name) => {
-    const sani_name = name.replace(/[^0-9a-z\s]/gi,' ').replace(/\s\s+/g, ' ').toLowerCase().split(" ").join("-");
+    const sani_name = name.replace(/[^0-9a-z'\s]/gi,' ')
+                          .replace(/[^0-9a-z\s]/gi, '')
+                          .replace(/\s\s+/g, ' ')
+                          .toLowerCase().split(" ").join("-");
     let data = `fields id, popularity, pulse_count, \
                 aggregated_rating, aggregated_rating_count, \
                 similar_games; where slug = "${sani_name}";`;

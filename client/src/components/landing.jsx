@@ -10,12 +10,17 @@ const Landing = ({ backgroundFetched, game }) => {
     <>
       {backgroundFetched ? (
         <section className="landing"> 
+          <div className="game-title-container">
+            <div className="game-title">
+              {game.name}
+            </div>
+          </div>
           <Screenshot />
           <GameInfo game={game}/>
-          <SimilarGamesRow />
           {game.igdb_id ?
             <TTB game={game} />
             : null}
+          <SimilarGamesRow />
         </section>
       ) : null}
     </>

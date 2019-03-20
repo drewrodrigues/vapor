@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { getSteamApp, clearGame, getIgdbApp, clearGames,
-         getIgdbApps, getScreenshots, clearScreenshots } from '../../actions/gamesActions';
+         getIgdbApps, getScreenshots, clearScreenshots,
+         renderScreenshots } from '../../actions/gamesActions';
 
 import Autosuggest from 'react-autosuggest';
 import '../../stylesheets/searchbar.scss';
@@ -64,6 +65,42 @@ class Searchbar extends React.Component{
                 () => this.props.getScreenshots({
                     gameIds: Object.keys(this.props.similarGames)
                 })
+            ).then(
+                () => {
+                    let missingScreenshots = [];
+                    const selectedScreenshots = Object.keys(this.props.similarGamesScreenshots);
+                    const selectedGames = Object.keys(this.props.similarGames);
+                    selectedGames.forEach( gameId => {
+                        if (!selectedScreenshots.includes(gameId)) {
+                            missingScreenshots = missingScreenshots.concat(gameId);
+                        }
+                    })
+                    if (missingScreenshots.length !== 0) {
+                        return this.props.getScreenshots({
+                            gameIds: missingScreenshots
+                        })
+                    }
+                }
+            ).then(
+                // Need to search for screenshots 3 times in case of missing
+                // screenshots. One of the worst APIs on the planet.
+                () => {
+                    let missingScreenshots = [];
+                    const selectedScreenshots = Object.keys(this.props.similarGamesScreenshots);
+                    const selectedGames = Object.keys(this.props.similarGames);
+                    selectedGames.forEach( gameId => {
+                        if (!selectedScreenshots.includes(gameId)) {
+                            missingScreenshots = missingScreenshots.concat(gameId);
+                        }
+                    })
+                    if (missingScreenshots.length !== 0) {
+                        return this.props.getScreenshots({
+                            gameIds: missingScreenshots
+                        })
+                    }
+                }
+            ).then(
+                () => this.props.renderScreenshots()
             );
         } 
         else if (method === "type"){
@@ -119,7 +156,8 @@ class Searchbar extends React.Component{
 const mapStateToProps = state => {
     return {
         activeGame: state.entities.game,
-        similarGames: state.entities.similarGames
+        similarGames: state.entities.similarGames,
+        similarGamesScreenshots: state.entities.similarGamesScreenshots
     };
 };
 
@@ -131,7 +169,8 @@ const mapDispatchToProps = dispatch => {
         getScreenshots: gameIds => dispatch(getScreenshots(gameIds)),
         clearGame: () => dispatch(clearGame()),
         clearGames: () => dispatch(clearGames()),
-        clearScreenshots: () => dispatch(clearScreenshots())
+        clearScreenshots: () => dispatch(clearScreenshots()),
+        renderScreenshots: () => dispatch(renderScreenshots())
     }
 }
 

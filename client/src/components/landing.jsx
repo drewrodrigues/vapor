@@ -1,26 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Searchbar from './search/searchbar';
 import Screenshot from './bg_screenshot/screenshot';
 import TTB  from '../components/game/ttb'
 import GameInfo from '../components/game/gameInfo'
+import SimilarGamesRow from './game/similarGamesRow';
 
 const Landing = ({ backgroundFetched, game }) => {
   return (
     <>
-      <h2>Landing</h2>
-      <Searchbar />
       {backgroundFetched ? (
-        <> 
+        <section className="landing"> 
+          <div className="game-title-container">
+            <div className="game-title">
+              {game.name}
+            </div>
+          </div>
           <Screenshot />
           <GameInfo game={game}/>
-        </>
+          {game.igdb_id ?
+            <TTB game={game} />
+            : null}
+          <SimilarGamesRow />
+        </section>
       ) : null}
-
-      {game.igdb_id ? 
-      <TTB game={game}/> 
-        : null}
-
     </>
   )
 

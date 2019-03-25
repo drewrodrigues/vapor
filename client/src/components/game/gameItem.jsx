@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 const GameItem = ({ game, similarGamesScreenshots }) => {
   const aggregated_rating = game.aggregated_rating || 0;
   const popularity = game.popularity || 0;
+  debugger
   const imageId = similarGamesScreenshots[game.igdb_id].image_id;
   return (
     <div className="game-item-wrapper">

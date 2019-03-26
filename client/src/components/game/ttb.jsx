@@ -23,6 +23,7 @@ class TTB extends React.Component {
     const { game } = this.props;
     const final_price = game.price_overview === undefined ? 0 : game.price_overview.final
 
+
     const data = {
       labels: ["Normal Playthrough","Complete Playthrough","Hasty Playthrough", "Price"],
       datasets: []

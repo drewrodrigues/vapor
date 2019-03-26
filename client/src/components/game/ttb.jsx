@@ -22,11 +22,6 @@ class TTB extends React.Component {
     const { normally, completely, hastily } = this.state
     const { game } = this.props;
     const final_price = game.price_overview === undefined ? 0 : game.price_overview.final
-    const COLORS = ["#0088FE", "#00C49F"];
-    const renderLabel = ({ name }) => {
-      return name;
-    };
-
 
     const data = {
       labels: ["Normal","Complete","Hastily", "Price"],

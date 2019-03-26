@@ -6,7 +6,7 @@ const keys = require('../../config/keys');
 // redirect to steam to authenticate
 router.get("/:id", (req, res) => {
     axios({
-        url: `https://store.steampowered.com/api/appdetails?appids=${req.params.id}`,
+        url: `https://store.steampowered.com/api/appdetails?appids=${req.params.id}&cc=US`,
         method: 'GET'
     })
         .then(response => {

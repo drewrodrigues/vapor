@@ -21,13 +21,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <main className="main">
         <Navbar />
         <Switch>
           <ProtectedRoute path="/dashboard" component={ Dashboard } />
           <Route path="/" component={ LandingContainer } />
         </Switch>
-      </div>
+      </main>
     )
   }
 }

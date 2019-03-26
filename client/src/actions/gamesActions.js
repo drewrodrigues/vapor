@@ -1,8 +1,6 @@
 import * as GameApiUtil from '../util/gameUtil';
 
-export const RECEIVE_GAMES = "RECEIVE_GAMES";
 export const RECEIVE_GAME = "RECEIVE_GAME";
-export const RECEIVE_SCREENSHOTS = "RECEIVE_SCREENSHOTS";
 export const RECEIVE_GAME_ERRORS = "RECEIVE_GAME_ERRORS";
 export const CLEAR_GAME = "CLEAR_GAME";
 export const CLEAR_GAMES = "CLEAR_GAMES";
@@ -27,24 +25,10 @@ export const clearScreenshots = () => {
   };
 };
 
-const receiveGames = games => {
-  return {
-    type: RECEIVE_GAMES,
-    games
-  };
-};
-
 const receiveGame = game => {
   return {
     type: RECEIVE_GAME,
     game
-  };
-};
-
-const receiveScreenshots = screenshots => {
-  return {
-    type: RECEIVE_SCREENSHOTS,
-    screenshots
   };
 };
 
@@ -70,15 +54,6 @@ export const getSteamApp = ({ gameId }) => {
   };
 };
 
-export const getIgdbApps = ({ gameIds }) => {
-  return dispatch => {
-    return GameApiUtil.getIgdbApps(gameIds).then(
-      res => dispatch(receiveGames(res.data)),
-      err => dispatch(receiveGameErrors(err.responseJSON))
-    );
-  };
-};
-
 export const getIgdbApp = ({ name }) => {
   return dispatch => {
     return GameApiUtil.getIgdbApp(name).then(
@@ -95,13 +70,4 @@ export const getTTB = id => dispatch => {
     },
     err => dispatch(receiveGameErrors(err.responseJSON))
   );
-};
-
-export const getScreenshots = ({ gameIds }) => {
-  return dispatch => {
-    return GameApiUtil.getScreenshots(gameIds).then(
-      res => dispatch(receiveScreenshots(res)),
-      err => dispatch(receiveGameErrors(err))
-    );
-  };
 };

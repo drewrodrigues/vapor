@@ -4,6 +4,7 @@ const mongoose    = require('mongoose')
 const User        = mongoose.model('users')
 const keys        = require('../config/keys')
 const SteamStrategy = require('passport-steam')
+const urls = require('../config/urls')
 
 const options = {}
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
@@ -22,8 +23,8 @@ module.exports = passport => {
   }))
 
   passport.use(new SteamStrategy({
-      returnURL: 'http://localhost:5000/api/auth/steam/return',
-      realm: 'http://localhost:5000',
+      returnURL: `${urls.baseUrl}/api/auth/steam/return`,
+      realm: `${urls.baseUrl}`,
       apiKey: '138845E97356105CA860A2396372660C'
     },
     (identifier, profile, done) => {

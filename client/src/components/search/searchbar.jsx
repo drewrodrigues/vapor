@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getSteamApp, clearGame, getIgdbApp, clearGames,
-         getIgdbApps, getScreenshots, clearScreenshots,
+import { getSteamApp, clearGame, getIgdbApp, clearGames, clearScreenshots,
          renderScreenshots } from '../../actions/gamesActions';
 
 import Autosuggest from 'react-autosuggest';
@@ -57,48 +56,6 @@ class Searchbar extends React.Component{
             this.props.clearScreenshots();
             this.props.getSteamApp({ gameId: newValue.appid }).then(
                 () => this.props.getIgdbApp({ name: newValue.name })
-            ).then(
-                () => this.props.getIgdbApps({ 
-                    gameIds: this.props.activeGame.similar_games
-                })
-            ).then(
-                () => this.props.getScreenshots({
-                    gameIds: Object.keys(this.props.similarGames)
-                })
-            ).then(
-                () => {
-                    let missingScreenshots = [];
-                    const selectedScreenshots = Object.keys(this.props.similarGamesScreenshots);
-                    const selectedGames = Object.keys(this.props.similarGames);
-                    selectedGames.forEach( gameId => {
-                        if (!selectedScreenshots.includes(gameId)) {
-                            missingScreenshots = missingScreenshots.concat(gameId);
-                        }
-                    })
-                    if (missingScreenshots.length !== 0) {
-                        return this.props.getScreenshots({
-                            gameIds: missingScreenshots
-                        })
-                    }
-                }
-            ).then(
-                // Need to search for screenshots 3 times in case of missing
-                // screenshots. One of the worst APIs on the planet.
-                () => {
-                    let missingScreenshots = [];
-                    const selectedScreenshots = Object.keys(this.props.similarGamesScreenshots);
-                    const selectedGames = Object.keys(this.props.similarGames);
-                    selectedGames.forEach( gameId => {
-                        if (!selectedScreenshots.includes(gameId)) {
-                            missingScreenshots = missingScreenshots.concat(gameId);
-                        }
-                    })
-                    if (missingScreenshots.length !== 0) {
-                        return this.props.getScreenshots({
-                            gameIds: missingScreenshots
-                        })
-                    }
-                }
             ).then(
                 () => this.props.renderScreenshots()
             );
@@ -165,8 +122,6 @@ const mapDispatchToProps = dispatch => {
     return {
         getSteamApp: gameId => dispatch(getSteamApp(gameId)),
         getIgdbApp: name => dispatch(getIgdbApp(name)),
-        getIgdbApps: gameIds => dispatch(getIgdbApps(gameIds)),
-        getScreenshots: gameIds => dispatch(getScreenshots(gameIds)),
         clearGame: () => dispatch(clearGame()),
         clearGames: () => dispatch(clearGames()),
         clearScreenshots: () => dispatch(clearScreenshots()),

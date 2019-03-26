@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-const GameItem = ({ game, similarGamesScreenshots }) => {
+const GameItem = ({ game }) => {
   const aggregated_rating = game.aggregated_rating || 0;
   const popularity = game.popularity || 0;
-  const imageId = similarGamesScreenshots[game.igdb_id].image_id;
+  const imageId = game.screenshots[0].image_id;
   return (
     <div className="game-item-wrapper">
       <div className="game-item">
@@ -18,10 +17,4 @@ const GameItem = ({ game, similarGamesScreenshots }) => {
   )
 };
 
-const mapStateToProps = state => {
-  return {
-    similarGamesScreenshots: state.entities.similarGamesScreenshots
-  };
-};
-
-export default connect(mapStateToProps)(GameItem);
+export default GameItem;

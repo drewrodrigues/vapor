@@ -30,11 +30,19 @@ class Navbar extends React.Component {
     } else {
       return (
         <div className="session">
-          <a href="http://localhost:5000/api/auth/steam"> {/* FIXME: proxy not working */}
+          <a href={ this.steamAuthUrl() }>
             <img src={ SteamSignInButtom } alt="Sign in through steam" className="navbar-signin"/>
           </a>
         </div>
       )
+    }
+  }
+
+  steamAuthUrl() {
+    if (process.env.NODE_ENV === "production") {
+      return "https://vapor-js.herokuapp.com/api/auth/steam"
+    } else {
+      return "http://localhost:5000/api/auth/steam"
     }
   }
 

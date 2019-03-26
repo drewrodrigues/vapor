@@ -5,13 +5,13 @@ class GameInfo extends React.Component{
         super(props)
     }
     render() {
-        const { aggregated_rating, metacritic, price_overview, recommendations, steam_id } = this.props.game
+        const { aggregated_rating, metacritic, price_overview, recommendations, steam_id, url} = this.props.game
         
         return (
             <ul className="gameInfo">
                 
                 
-                {aggregated_rating ? (<li><div className="igdbScore icon"></div><p>{Math.round(aggregated_rating)}</p></li>
+                {aggregated_rating ? (<li><a href={url}><div className="igdbScore icon"></div><p>{Math.round(aggregated_rating)}</p></a></li>
                                     ):(
                                     <li><div className="igdbScore none icon"></div><p></p></li>)}
                 {metacritic ? (<li><a href={metacritic.url}><div className="metacriticScore icon"></div><p>{metacritic.score}</p></a></li>

@@ -22,7 +22,7 @@ export const getIgdbApp = (name) => {
                           .replace(/[^0-9a-z\s]/gi, '')
                           .replace(/\s\s+/g, ' ')
                           .toLowerCase().split(" ").join("-");
-    let data = `fields id, popularity, pulse_count, \
+    let data = `fields id, url, popularity, pulse_count, \
                 aggregated_rating, aggregated_rating_count, \
                 similar_games; where slug = "${sani_name}";`;
     return axios({
@@ -35,7 +35,7 @@ export const getIgdbApp = (name) => {
 };
 
 export const getIgdbApps = (gameIds) => {
-    let data = `fields id, popularity, pulse_count, name, \
+    let data = `fields id, url, popularity, pulse_count, name, \
                 aggregated_rating, aggregated_rating_count, \
                 similar_games; where id = (${gameIds.join(", ")});`;
 

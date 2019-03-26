@@ -4,6 +4,7 @@ const User     = require('../../models/User')
 const jwt      = require('jsonwebtoken')
 const keys     = require('../../config/keys')
 const passport = require('passport')
+const urls = require("../../config/urls")
 
 // redirect to steam to authenticate
 router.get('/steam', passport.authenticate('steam'))
@@ -29,7 +30,7 @@ const signInUser = (user, res) => {
     keys.secretOrKey,
     { expiresIn: 3600 }, // 1 hour
     (err, token) => {
-      res.redirect("http://localhost:3000?token=" + "Bearer " + token)
+      res.redirect(`${urls.clientUrl}?token=` + "Bearer " + token)
     }
   )
 }

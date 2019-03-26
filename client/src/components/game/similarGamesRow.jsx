@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GameItem from './gameItem';
 
-const SimilarGamesRow = props => {
+const SimilarGamesRow = ({ similarGames }) => {
   return (
     <div className="similar-games-row-container">
       <div className="similar-games-title">Similar Games</div>
       <ul className="similar-games-row">
-        {props.similarGames.map(game => {
-          return <GameItem key={game.igdb_id} game={game}/>
+        {similarGames.map(game => {
+          return <GameItem key={game.id} game={game}/>
         })}
       </ul>
     </div>
@@ -17,7 +17,7 @@ const SimilarGamesRow = props => {
 
 const mapStateToProps = state => {
   return {
-    similarGames: Object.values(state.entities.similarGames)
+    similarGames: state.entities.game.similar_games
   };
 };
 

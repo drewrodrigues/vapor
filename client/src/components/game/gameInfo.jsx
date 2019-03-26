@@ -11,14 +11,14 @@ class GameInfo extends React.Component{
             <ul className="gameInfo">
                 
                 
-                {aggregated_rating ? (<li><a href={url}><div className="igdbScore icon"></div><p>{Math.round(aggregated_rating)}</p></a></li>
+                {aggregated_rating ? (<li><a target="_blank" href={url}><div className="igdbScore icon"></div><p>{Math.round(aggregated_rating)}</p></a></li>
                                     ):(
                                     <li><div className="igdbScore none icon"></div><p></p></li>)}
-                {metacritic ? (<li><a href={metacritic.url}><div className="metacriticScore icon"></div><p>{metacritic.score}</p></a></li>
+                {metacritic ? (<li><a target="_blank" href={metacritic.url}><div className="metacriticScore icon"></div><p>{metacritic.score}</p></a></li>
                                     ):(
                                     <li><div className="metacriticScore none icon"></div><p></p></li>)}
 
-                {recommendations ? (<li><a href={`https://store.steampowered.com/app/${steam_id}`}><div className="recommendations icon"></div><p>{recommendations.total}</p></a></li>
+                {recommendations ? (<li><a target="_blank"href={`https://store.steampowered.com/app/${steam_id}`}><div className="recommendations icon"></div><p>{recommendations.total}</p></a></li>
                                     ):(
                                     <li><div className="recommendations none icon"></div><p></p></li>)}
                 <li>

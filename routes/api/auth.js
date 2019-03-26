@@ -11,7 +11,8 @@ router.get('/steam', passport.authenticate('steam'))
 
 // once authenticated, sign in & redirect to dashboard
 router.get('/steam/return', passport.authenticate('steam'), (req, res) => {
-  signInUser(req.user, res)
+  const steamId = req.query['openid.identity'].replace("https://steamcommunity.com/openid/id/", "")
+  signInUser(steamId, res)
 })
 
 // get current user
@@ -23,8 +24,8 @@ router.get('/current', passport.authenticate('jwt'), (req, res) => {
 })
 
 // helpers --------------------------------------------------------------------
-const signInUser = (user, res) => {
-  const payload = { id: user.id, steamId: user.steamId }
+const signInUser = (steamId, res) => {
+  const payload = { steamId }
   jwt.sign(
     payload,
     keys.secretOrKey,

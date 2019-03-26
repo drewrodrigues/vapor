@@ -13,7 +13,6 @@ class TTB extends React.Component {
       hastily: null
     };
   }
-
   componentDidMount() {
     this.props
       .getTTB(this.props.game.igdb_id)
@@ -22,10 +21,12 @@ class TTB extends React.Component {
   render() {
     const { normally, completely, hastily } = this.state
     const { game } = this.props;
+    const final_price = game.price_overview === undefined ? 0 : game.price_overview.final
     const COLORS = ["#0088FE", "#00C49F"];
     const renderLabel = ({ name }) => {
       return name;
     };
+
 
     const data = {
       labels: ["Normal","Complete","Hastily", "Price"],
@@ -33,7 +34,7 @@ class TTB extends React.Component {
     };
     if (normally){
       data.datasets.push({
-        data: [Math.round(this.state.normally/60/60), 0,0, Math.round(game.price_overview.final/100)],
+        data: [Math.round(this.state.normally/60/60), 0,0, Math.round(final_price/100)],
         backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384",,"#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
       })
@@ -41,7 +42,7 @@ class TTB extends React.Component {
 
     if (completely){
       data.datasets.push({
-        data: [0,Math.round(this.state.completely/60/60),0, Math.round(game.price_overview.final/100)],
+        data: [0,Math.round(this.state.completely/60/60),0, Math.round(final_price/100)],
         backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
       })
@@ -49,7 +50,7 @@ class TTB extends React.Component {
 
     if (hastily){
       data.datasets.push({
-        data: [0,0,Math.round(this.state.hastily/60/60), Math.round(game.price_overview.final/100)],
+        data: [0,0,Math.round(this.state.hastily/60/60), Math.round(final_price/100)],
         backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
       })

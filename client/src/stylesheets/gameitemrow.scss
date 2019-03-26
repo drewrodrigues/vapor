@@ -1,7 +1,12 @@
+
 .similar-games-row {
   display: flex;
-  flex-wrap: wrap;
+  overflow: auto;
 
   height: 200px;
+}
 
+
+.similar-games-title {
+  margin-left: 30px;
 }

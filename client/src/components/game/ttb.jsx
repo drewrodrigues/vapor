@@ -24,37 +24,42 @@ class TTB extends React.Component {
     const final_price = game.price_overview === undefined ? 0 : game.price_overview.final
 
     const data = {
-      labels: ["Normal","Complete","Hastily", "Price"],
+      labels: ["Normal Playthrough","Complete Playthrough","Hasty Playthrough", "Price"],
       datasets: []
     };
     if (normally){
       data.datasets.push({
         data: [Math.round(this.state.normally/60/60), 0,0, Math.round(final_price/100)],
-        backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384",,"#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
+        backgroundColor: ["#137500","","", "#d1004c"],
+        hoverBackgroundColor: ["#ffffff","#ffffff","#ffffff", "#ffffff", "#ffffff"],
+        borderColor: '#000000'
       })
     }
 
     if (completely){
       data.datasets.push({
         data: [0,Math.round(this.state.completely/60/60),0, Math.round(final_price/100)],
-        backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
+        backgroundColor: ["","#1fbf00","", "#d1004c"],
+        hoverBackgroundColor: ["#ffffff","#ffffff","#ffffff", "#ffffff", "#ffffff"],
+        borderColor: '#000000'
+
       })
     }
 
     if (hastily){
       data.datasets.push({
         data: [0,0,Math.round(this.state.hastily/60/60), Math.round(final_price/100)],
-        backgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384","#FF6384","#FF6384", "#36A2EB", "#FFCE56"]
+        backgroundColor: ["","","#137500", "#d1004c"],
+        hoverBackgroundColor: ["#ffffff","#ffffff","#ffffff", "#ffffff", "#ffffff"],
+        borderColor: '#000000'
+
       })
     }
 
 
 
     return normally || completely || hastily ? (
-      <Pie data={data} width={100} height={20} />
+      <Pie data={data} width={100} height={20} legend={{display: false}} />
     ) : null;
   }
 }

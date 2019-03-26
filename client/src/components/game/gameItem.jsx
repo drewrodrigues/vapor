@@ -4,7 +4,6 @@ const GameItem = ({ game }) => {
   const aggregated_rating = game.aggregated_rating || 0;
   const popularity = game.popularity || 0;
   const imageId = game.screenshots[0].image_id;
-  debugger;
   return (
     <div className="game-item-wrapper">
       <div className="game-item">

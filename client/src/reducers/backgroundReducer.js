@@ -1,15 +1,21 @@
 import { CLEAR_SCREENSHOTS, RENDER_SCREENSHOTS } from '../actions/gamesActions';
 
-const _nullBackground = false;
+const preloaded = {
+  fetched: false,
+  url: null,
+};
 
-const loadingReducer = (state = _nullBackground, action) => {
+const loadingReducer = (state = preloaded, action) => {
   Object.freeze(state);
 
   switch (action.type) {
     case CLEAR_SCREENSHOTS:
-      return _nullBackground;
+      return {fetched: false, url: state.url};
     case RENDER_SCREENSHOTS:
-      return true;
+      return {
+        fetched: true,
+        url: action.url,
+      };
     default:
       return state;
   }

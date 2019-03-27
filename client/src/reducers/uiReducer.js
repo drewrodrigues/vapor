@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import backgroundFetchedReducer from './backgroundFetchedReducer';
+import backgroundReducer from './backgroundReducer';
 
 const uiReducer = combineReducers({
-  backgroundFetched: backgroundFetchedReducer
+  background: backgroundReducer
 });
 
 export default uiReducer;

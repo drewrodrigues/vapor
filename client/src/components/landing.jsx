@@ -8,21 +8,23 @@ import SimilarGamesRow from './game/similarGamesRow';
 const Landing = ({ backgroundFetched, game }) => {
   return (
     <>
+      <section className="landing"> 
       {backgroundFetched ? (
-        <section className="landing"> 
+        <>
           <div className="game-title-container">
             <div className="game-title">
               {game.name}
             </div>
           </div>
-          <Screenshot />
           <GameInfo game={game}/>
           {game.igdb_id ?
             <TTB game={game} />
             : null}
           <SimilarGamesRow />
+        </>
+          ) : null}
+          <Screenshot />
         </section>
-      ) : null}
     </>
   )
 
@@ -30,7 +32,7 @@ const Landing = ({ backgroundFetched, game }) => {
 
 const mapStateToProps = state => {
   return {
-    backgroundFetched: state.ui.backgroundFetched,
+    backgroundFetched: state.ui.background.fetched,
     game: state.entities.game
   };
 };

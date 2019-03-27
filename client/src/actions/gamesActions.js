@@ -39,9 +39,10 @@ const receiveGameErrors = err => {
   };
 };
 
-export const renderScreenshots = () => {
+export const renderScreenshots = (url) => {
   return {
-    type: RENDER_SCREENSHOTS
+    type: RENDER_SCREENSHOTS,
+    url
   };
 };
 

@@ -57,7 +57,9 @@ class Searchbar extends React.Component{
             this.props.getSteamApp({ gameId: newValue.appid }).then(
                 () => this.props.getIgdbApp({ name: newValue.name })
             ).then(
-                () => this.props.renderScreenshots()
+                () => {
+                    const url = this.props.activeGame.screenshots[Math.floor(Math.random() * this.props.activeGame.screenshots.length)].path_full;
+                    this.props.renderScreenshots(url)}
             );
         } 
         else if (method === "type"){
@@ -125,7 +127,7 @@ const mapDispatchToProps = dispatch => {
         clearGame: () => dispatch(clearGame()),
         clearGames: () => dispatch(clearGames()),
         clearScreenshots: () => dispatch(clearScreenshots()),
-        renderScreenshots: () => dispatch(renderScreenshots())
+        renderScreenshots: (url) => dispatch(renderScreenshots(url))
     }
 }
 

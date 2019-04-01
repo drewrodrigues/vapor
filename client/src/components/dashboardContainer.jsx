@@ -7,7 +7,9 @@ import {
 } from '../actions/userDatumActions'
 
 const mapStateToProps = state => {
+  const profile = state.entities.profile
   return {
+    avatarUrl: profile.avatarfull,
     steamId: state.session.user.steamId
   }
 }

@@ -6,7 +6,7 @@ import { login } from '../actions/sessionActions'
 import { ProtectedRoute } from '../util/routeUtil'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
-import Dashboard from './dashboard'
+import DashboardContainer from './dashboardContainer'
 import LandingContainer from './landing'
 import Navbar from './navbar'
 
@@ -24,7 +24,7 @@ class App extends Component {
       <main className="main">
         <Navbar />
         <Switch>
-          <ProtectedRoute path="/dashboard" component={ Dashboard } />
+          <ProtectedRoute path="/dashboard" component={ DashboardContainer } />
           <Route path="/" component={ LandingContainer } />
         </Switch>
       </main>

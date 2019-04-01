@@ -3,6 +3,9 @@ import * as steamApiUtil from '../util/userDatumUtil';
 export const RECEIVE_PLAYER_GAME_ACHIEVEMENTS = "RECEIVE_PLAYER_GAME_ACHIEVEMENTS";
 export const RECEIVE_OWNED_GAMES = "RECEIVE_OWNED_GAMES";
 
+export const RECEIVE_PROFILE = "RECEIVE_PROFILE"
+export const REMOVE_PROFILE = "REMOVE_PROFILE"
+
 const recievePlayerGameAchievements = (achievements, gameName) => ({
     type: RECEIVE_PLAYER_GAME_ACHIEVEMENTS,
     // format = array of objects
@@ -18,6 +21,19 @@ const recieveOwnedGames = (ownedGames, gamesAndTimes) => ({
     // format = array of objects {appId, playtime_forever(in min)}
     gamesAndTimes,
 });
+
+const receiveProfile = profile => {
+  return {
+    type: RECEIVE_PROFILE,
+    profile
+  }
+}
+
+const removeProfile = () => {
+  return {
+    type: REMOVE_PROFILE
+  }
+}
 
 export const getPlayerGameAchievements = (steamId, appId) => dispatch => (
     steamApiUtil.getPlayerGameAchievements(steamId, appId)
@@ -38,3 +54,16 @@ export const getOwnedGames = (steamId) => dispatch => (
         )
 );
 
+export const getProfile = steamId => dispatch => {
+  return steamApiUtil.getProfile(steamId)
+    .then(res => {
+      return dispatch(receiveProfile(res.data))
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+export const clearProfile = () => dispatch => {
+  return dispatch(removeProfile())
+}

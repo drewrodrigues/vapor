@@ -10,7 +10,9 @@ const mapStateToProps = state => {
   const profile = state.entities.profile
   return {
     avatarUrl: profile.avatarfull,
-    steamId: state.session.user.steamId
+    name: profile.realname,
+    steamId: state.session.user.steamId,
+    username: profile.personaname
   }
 }
 

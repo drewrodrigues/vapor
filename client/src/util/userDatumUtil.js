@@ -15,3 +15,8 @@ export const getOwnedGames = (steamId) => (
         data: {steamId}
     })
 );
+
+export const getProfile = steamId => {
+  return axios
+    .get(`/external/steam/profile/${steamId}`)
+}

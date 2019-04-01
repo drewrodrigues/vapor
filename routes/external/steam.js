@@ -56,4 +56,13 @@ router.post('/owned-games', (req, res) => {
         .catch(err => console.log(err));
 });
 
+router.get('/profile/:steamId', (req, res) => {
+  axios
+    .get(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${keys.steamAPIKey}&steamids=${req.params.steamId}`)
+    .then(response => {
+      return res.send(response.data.response.players[0])
+    })
+    .catch(error => console.log(error))
+})
+
 module.exports = router;

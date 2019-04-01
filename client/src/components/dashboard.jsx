@@ -11,8 +11,12 @@ class Dashboard extends React.Component {
 	}
 
 	render() {
+		const { avatarUrl } = this.props
 		return (
-			<h3>Dashboard</h3>
+			<>
+				<h3>Dashboard</h3>
+				<img src={ avatarUrl } className="dashboard-avatar"/>
+			</>
 		)
 	}
 }

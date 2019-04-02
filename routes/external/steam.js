@@ -3,6 +3,10 @@ const router   = express.Router()
 const axios    = require('axios')
 const keys = require('../../config/keys');
 
+const steamUrl = route => {
+  return `https://api.steampowered.com${route}/?key=${keys.steamAPIKey}`
+}
+
 // redirect to steam to authenticate
 router.get("/:id", (req, res) => {
     axios({
@@ -42,25 +46,31 @@ router.post('/player-achievements', (req, res) => {
         .catch(err => console.log(err));
 });
 
-// get player's owned games
-router.post('/owned-games', (req, res) => {
-    axios({
-        url: `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${keys.steamAPIKey}&steamid=${req.body.steamId}&format=json`,
-        method: `GET`,
-        // key: keys.steamAPIKey,
-        include_free_played_games: true,
-        steamid: req.body.steamId,
-        format: 'json'
-    })
-        .then(apiRes => res.json(apiRes.data))
-        .catch(err => console.log(err));
-});
-
 router.get('/profile/:steamId', (req, res) => {
   axios
-    .get(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${keys.steamAPIKey}&steamids=${req.params.steamId}`)
+    .get(steamUrl("/ISteamUser/GetPlayerSummaries/v2"), { params: {
+      steamids: req.params.steamId,
+    }})
     .then(response => {
       return res.send(response.data.response.players[0])
+    })
+    .catch(error => console.log(error))
+})
+
+router.get('/ownedGames/:steamId', (req, res) => {
+  axios
+    .get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
+      steamid: req.params.steamId,
+      include_appinfo: 1,
+      include_played_free_games: 1
+    }})
+    .then(response => {
+      let responseData = response.data.response
+      for (let i = 0; i < responseData.game_count; i++){
+        let gameImageUrl = `http://media.steampowered.com/steamcommunity/public/images/apps/${responseData.games[i].appid}/${responseData.games[i].img_icon_url}.jpg`
+        response.data.response.games[i].image_url = gameImageUrl
+      }
+      return res.send(response.data.response)
     })
     .catch(error => console.log(error))
 })

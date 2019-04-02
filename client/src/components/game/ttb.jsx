@@ -24,7 +24,7 @@ class TTB extends React.Component {
     const final_price = game.price_overview === undefined ? 0 : game.price_overview.final
 
     const data = {
-      labels: ["Normal Playthrough","Complete Playthrough","Hasty Playthrough", "Price"],
+      labels: ["Normal Playthrough","Complete Playthrough","Hasty Playthrough", "Price $"],
       datasets: []
     };
     if (normally){
@@ -59,7 +59,10 @@ class TTB extends React.Component {
 
 
     return normally || completely || hastily ? (
-      <Pie data={data} width={100} height={20} legend={{display: false}} />
+      <div>
+        <h1>Price:Gameplay(hours)</h1>
+        <Pie data={data} width={100} height={20} legend={{display: false}} />
+      </div>
     ) : null;
   }
 }

@@ -45,6 +45,13 @@ class Searchbar extends React.Component{
         };
     }
     
+    componentDidMount() {
+        steamGames = steamGames.applist.apps.app;
+        steamGames = steamGames
+            .filter(game => steamSpy[game.appid])
+        const newValue = steamGames[Math.floor(Math.random() * steamGames.length)];
+        this.onChange({}, {newValue, method:"enter"});
+    }
     onChange = (event, { newValue, method }) => {
         if(method === "enter" || method === "click"){
             this.setState({ 
@@ -68,6 +75,7 @@ class Searchbar extends React.Component{
     };
 
     handleSubmit = e => {
+        console.log(e);
         e.preventDefault()
         this.setState({ value: ""})
     }

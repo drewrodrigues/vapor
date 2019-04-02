@@ -3,14 +3,16 @@ import Dashboard from './dashboard'
 
 import {
   getProfile,
-  clearProfile
+  clearProfile,
+  getOwnedGames
 } from '../actions/userDatumActions'
 
 const mapStateToProps = state => {
-  const profile = state.entities.profile
+  const { profile } = state.entities
   return {
     avatarUrl: profile.avatarfull,
     name: profile.realname,
+    ownedGames: profile.ownedGames,
     steamId: state.session.user.steamId,
     username: profile.personaname
   }
@@ -19,6 +21,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProfile: steamId => dispatch(getProfile(steamId)),
+    getOwnedGames: steamId => dispatch(getOwnedGames(steamId)),
     clearProfile: () => dispatch(clearProfile())
   }
 }

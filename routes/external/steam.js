@@ -67,10 +67,10 @@ router.get('/ownedGames/:steamId', (req, res) => {
     .then(response => {
       let responseData = response.data.response
       for (let i = 0; i < responseData.game_count; i++){
-        let gameImageUrl = `http://media.steampowered.com/steamcommunity/public/images/apps/${responseData.games[i].appid}/${responseData.games[i].img_icon_url}.jpg`
+        let gameImageUrl = `http://media.steampowered.com/steamcommunity/public/images/apps/${responseData.games[i].appid}/${responseData.games[i].img_logo_url}.jpg`
         response.data.response.games[i].image_url = gameImageUrl
       }
-      return res.send(response.data.response)
+      return res.send(response.data.response.games)
     })
     .catch(error => console.log(error))
 })

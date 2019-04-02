@@ -35,23 +35,17 @@ const removeProfile = () => {
   }
 }
 
+const receiveOwnedGames = ownedGames => {
+  return {
+    type: RECEIVE_OWNED_GAMES,
+    ownedGames
+  }
+}
+
 export const getPlayerGameAchievements = (steamId, appId) => dispatch => (
     steamApiUtil.getPlayerGameAchievements(steamId, appId)
         .then(res => dispatch(recievePlayerGameAchievements(res.data.playerstats.achievements,
             res.data.playerstats.gameName)))
-);
-
-export const getOwnedGames = (steamId) => dispatch => (
-    steamApiUtil.getOwnedGames(steamId)
-        .then(res => dispatch(recieveOwnedGames(
-            res.data.response.games
-                .filter(game => game.playtime_forever > 599)
-                .map(game => game.appid),
-            res.data.response.games
-                .filter(game => game.playtime_forever > 599)
-                )
-            )
-        )
 );
 
 export const getProfile = steamId => dispatch => {
@@ -66,4 +60,16 @@ export const getProfile = steamId => dispatch => {
 
 export const clearProfile = () => dispatch => {
   return dispatch(removeProfile())
+}
+
+export const getOwnedGames = steamId => dispatch => {
+  return steamApiUtil.getOwnedGames(steamId)
+    .then(res => {
+      dispatch(receiveOwnedGames(
+        res.data.filter(game => game.playtime_forever > 599)
+      ))
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }

@@ -1,16 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Screenshot = ({ screenshot, altName }) => {
-  const divStyle = {
-    backgroundImage:  "url(" + screenshot + ")"
-  };
-  return (
-    <div className="bg-screenshot" style={divStyle}>
-      {/* <img src={screenshot}
-           alt={altName} /> */}
-    </div>
-  )
+class Screenshot extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.screenshot !== this.props.screenshot){
+      const bgImg = new Image();
+      const bgElement = document.getElementsByClassName("bg-screenshot")[0];
+      bgImg.onload = () => {
+        bgElement.style.backgroundImage = 'url(' + bgImg.src + ')';
+      };
+      bgImg.src = this.props.screenshot;
+    }
+  }
+
+  render() {
+    return (
+      <div className="bg-screenshot"></div>
+    )
+  }
 }
 
 const mapStateToProps = state => {

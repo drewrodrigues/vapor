@@ -24,7 +24,7 @@ export const getIgdbApp = (name) => {
                           .toLowerCase().split(" ").join("-");
     let data = `fields id, url, popularity, pulse_count, \
                 aggregated_rating, aggregated_rating_count, \
-                similar_games.screenshots.image_id, similar_games.name; \
+                similar_games.screenshots.image_id, similar_games.name, similar_games.url; \
                 where slug = "${sani_name}";`;
     return axios({
         url: `/external/igdb/game`,

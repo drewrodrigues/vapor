@@ -13,8 +13,7 @@ const Popularity = ({games}) => {
     
     datasets: [{
       label: "",
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
+      backgroundColor: '#184328',
       borderWidth: 1,
       data: popularities
     }]

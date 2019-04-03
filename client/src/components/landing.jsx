@@ -26,10 +26,10 @@ const Landing = ({ backgroundFetched, game }) => {
           </div>
           <GameInfo game={game}/>
           {game.igdb_id ?
-            <>
+            <div className="game-vis">
               <Popularity games={games} />
               <TTB game={game} />
-            </>
+            </div>
             : null}
           <SimilarGamesRow />
         </>

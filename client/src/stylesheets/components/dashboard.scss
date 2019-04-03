@@ -1,3 +1,34 @@
+.dashboard {
+  margin-top: 100px;
+  background: #222;
+  padding: 20px;
+  border-radius: 5px;
+}
+
 .dashboard-avatar {
   border-radius: 50%; 
+  margin-top: -100px;
+  float: left;
+  margin-right: 20px;
+}
+
+.dashboard-name {
+  margin-bottom: 10px;
+}
+
+.dashboard-timePlayed {
+  font-size: 12px;
+}
+
+.dashboard-ownedGames {
+  margin-top: 50px;
+}
+
+.dashboard-ownedGames-title {
+  margin-bottom: 10px;
+}
+
+.dashboard-ownedGame {
+  display: inline-block;
+  border-radius: 5px;
 }

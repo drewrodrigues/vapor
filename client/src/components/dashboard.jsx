@@ -12,16 +12,18 @@ class Dashboard extends React.Component {
 	}
 
 	render() {
-		const { avatarUrl, name, ownedGames, username } = this.props
+		const { avatarUrl, name, ownedGames, totalTimePlayed, username } = this.props
+		console.log(totalTimePlayed)
 		if (!ownedGames || !name) return null
 
 		return (
 			<>
 				<h3>{ name } | { username }</h3>
 				<img src={ avatarUrl } className="dashboard-avatar"/>
+				<p>Total time played: { totalTimePlayed } hours</p>
 
-				{ownedGames.map(game => (
-					<img src={ game.image_url } alt={`${game.name} icon`} />
+				{ ownedGames.map(game => (
+					<img src={ game.image_url } alt={`${ game.name } icon`} />
 				))}
 			</>
 		)

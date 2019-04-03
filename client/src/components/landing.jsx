@@ -4,8 +4,16 @@ import Screenshot from './bg_screenshot/screenshot';
 import TTB  from '../components/game/ttb'
 import GameInfo from '../components/game/gameInfo'
 import SimilarGamesRow from './game/similarGamesRow';
+import Popularity from './game/popularity';
 
 const Landing = ({ backgroundFetched, game }) => {
+  let games = [];
+  if(game.similar_games){
+    games = games.concat(game.similar_games);
+    games.push(game)
+  }
+  
+
   return (
     <>
       <section className="landing"> 
@@ -18,7 +26,10 @@ const Landing = ({ backgroundFetched, game }) => {
           </div>
           <GameInfo game={game}/>
           {game.igdb_id ?
-            <TTB game={game} />
+            <>
+              <Popularity games={games} />
+              <TTB game={game} />
+            </>
             : null}
           <SimilarGamesRow />
         </>

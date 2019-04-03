@@ -18,14 +18,14 @@ export const getSteamBG = (id) => (
 
 // IGDB
 export const getIgdbApp = (name) => {
-    const sani_name = name.replace(/[^0-9a-z'\s]/gi,' ')
+    const sanitizedName = name.replace(/[^0-9a-z'\s]/gi,' ')
                           .replace(/[^0-9a-z\s]/gi, '')
                           .replace(/\s\s+/g, ' ')
                           .toLowerCase().split(" ").join("-");
     let data = `fields id, url, popularity, pulse_count, \
                 aggregated_rating, aggregated_rating_count, \
-                similar_games.screenshots.image_id, similar_games.name, similar_games.url, similar_games.popularity; \
-                where slug = "${sani_name}";`;
+                similar_games.screenshots.image_id, similar_games.name, similar_games.url, similar_games.popularity,time_to_beat.*; \
+                where slug = "${sanitizedName}";`;
     return axios({
         url: `/external/igdb/game`,
         method: 'POST',

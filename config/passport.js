@@ -25,7 +25,7 @@ module.exports = passport => {
   passport.use(new SteamStrategy({
       returnURL: `${urls.baseUrl}/api/auth/steam/return`,
       realm: `${urls.baseUrl}`,
-      apiKey: '138845E97356105CA860A2396372660C'
+      apiKey: keys.steamAPIKey
     },
     (identifier, profile, done) => {
       const steamId = profile._json.steamid

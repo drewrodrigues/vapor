@@ -2,14 +2,6 @@ const express = require('express')
 const app     = express()
 const path    = require('path')
 
-// mounting frontend
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static('client/build'))
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-  })
-}
-
 // middleware -----------------------------------------------------------------
 const morgan = require('morgan')
 app.use(morgan('dev'))
@@ -46,6 +38,14 @@ app.use(bodyParser.json())
 app.use('/api/auth', auth)
 app.use('/external/igdb', igdb)
 app.use('/external/steam', steam)
+
+// mounting frontend
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static('client/build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  })
+}
 
 // server ---------------------------------------------------------------------
 // - setup

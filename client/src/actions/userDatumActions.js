@@ -14,13 +14,13 @@ const recievePlayerGameAchievements = (achievements, gameName) => ({
     gameName,
 });
 
-const recieveOwnedGames = (ownedGames, gamesAndTimes) => ({
-    type: RECEIVE_OWNED_GAMES,
-    // format = array appIds
-    ownedGames,
-    // format = array of objects {appId, playtime_forever(in min)}
-    gamesAndTimes,
-});
+// const recieveOwnedGames = (ownedGames, gamesAndTimes) => ({
+//     type: RECEIVE_OWNED_GAMES,
+//     // format = array appIds
+//     ownedGames,
+//     // format = array of objects {appId, playtime_forever(in min)}
+//     gamesAndTimes,
+// });
 
 const receiveProfile = profile => {
   return {

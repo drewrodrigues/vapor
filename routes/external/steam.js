@@ -33,7 +33,7 @@ router.get("/:id", (req, res) => {
 })
 
 // get player's achievements for a game
-router.post('/player-achievements', (req, res) => {
+router.get('/player-achievements', (req, res) => {
     axios({
         url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${req.body.appId}&key=${keys.steamAPIKey}&steamid=${req.body.steamId}`,
         method: `GET`,

@@ -4,13 +4,14 @@ import Dashboard from './dashboard'
 import {
   getProfile,
   clearProfile,
-  getOwnedGames
+  getOwnedGames, 
+  getPlayerGameAchievements
 } from '../actions/userDatumActions'
 
 import { totalTimePlayed } from '../reducers/selectors'
 
 const mapStateToProps = state => {
-  const { profile } = state.entities
+  const { profile } = state.entities;
   return {
     avatarUrl: profile.avatarfull,
     name: profile.realname,

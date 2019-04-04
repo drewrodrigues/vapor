@@ -33,7 +33,8 @@ router.get("/:id", (req, res) => {
 })
 
 // get player's achievements for a game
-router.get('/player-achievements', (req, res) => {
+router.post('/player-achievements', (req, res) => {
+    console.log(req.body);
     axios({
         url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${req.body.appId}&key=${keys.steamAPIKey}&steamid=${req.body.steamId}`,
         method: `GET`,
@@ -58,21 +59,72 @@ router.get('/profile/:steamId', (req, res) => {
 })
 
 router.get('/ownedGames/:steamId', (req, res) => {
+    var responseData;
+    var steamId = req.params.steamId;
   axios
     .get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
-      steamid: req.params.steamId,
+      steamId,
       include_appinfo: 1,
       include_played_free_games: 1
     }})
     .then(response => {
-      let responseData = response.data.response
-      for (let i = 0; i < responseData.game_count; i++){
-        let gameImageUrl = `http://media.steampowered.com/steamcommunity/public/images/apps/${responseData.games[i].appid}/${responseData.games[i].img_logo_url}.jpg`
-        response.data.response.games[i].image_url = gameImageUrl
+      responseData = response.data.response.games;
+      for (let i = 0; i < responseData.length; i++){
+        let gameImageUrl = `http://media.steampowered.com/steamcommunity/public/images/apps/${responseData[i].appid}/${responseData[i].img_logo_url}.jpg`
+        responseData[i].image_url = gameImageUrl;
       }
-      return res.send(response.data.response.games)
     })
-    .catch(error => console.log(error))
+    .then(() => { 
+        let promiseArray = [];
+        for (let i = 0; i < responseData.length; i++) {
+            // axios call to get achievements
+            // const p1 = axios({
+            //     url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001`,
+            //     method: `GET`,
+            //     key: keys.steamAPIKey,
+            //     appid: responseData[i].appId,
+            //     steamid,
+            //     format: 'json'
+            // })            
+            // .then(response => {
+            //     let achievementsAll = response.data.playerstats.achievements;
+            //     let achievementsCompleted = achievementsAll.filter(el => el.achieved === 1);
+            //     responseData[i].totalAchievements = achievementsAll.length;
+            //     responseData[i].completedAchievements = achievementsCompleted.length;
+            // });
+            // promiseArray.push(p1);
+
+            const p2 = axios.get('https://api-v3.igdb.com/time_to_beats', {headers: {
+                    'Accept': 'application/json',
+                    'user-key': keys.igdbKey
+                }, params: {
+                    data: `fields *; where slug = ${responseData[i].name};`
+                }
+            })
+            .then(response => {
+                // const { data } = response;
+                // let normally = 0;
+                // let normally_count = 0;
+                // data.forEach(el => {
+                //     el.normally ? normally = normally + el.normally : '';
+                //     el.normally ? normally_count++ : '';
+                // });
+
+                // normally = normally / normally_count;
+                // responseData[i].avgTimePlayed = normally / 3600;
+                responseData[i].avgTimePlayed = response.data;
+            });
+            promiseArray.push(p2);
+        }
+        return Promise.all(promiseArray)
+            .then(() => {
+                res.send(responseData);
+                console.log("Trying to respond...");
+            });
+    })
+    .catch(error => {
+        res.send(error);
+    });
 })
 
 module.exports = router;

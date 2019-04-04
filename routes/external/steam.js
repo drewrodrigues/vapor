@@ -103,21 +103,25 @@ router.get('/ownedGames/:steamId', (req, res) => {
         let promiseArray = [];
         for (let i = 0; i < responseData.length; i++) {
             // axios call to get achievements
-            // const p1 = axios({
-            //     url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001`,
-            //     method: `GET`,
-            //     key: keys.steamAPIKey,
-            //     appid: responseData[i].appId,
-            //     steamid,
-            //     format: 'json'
-            // })            
-            // .then(response => {
-            //     let achievementsAll = response.data.playerstats.achievements;
-            //     let achievementsCompleted = achievementsAll.filter(el => el.achieved === 1);
-            //     responseData[i].totalAchievements = achievementsAll.length;
-            //     responseData[i].completedAchievements = achievementsCompleted.length;
-            // });
-            // promiseArray.push(p1);
+            const p1 = axios.get(`http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001`, { params: {
+                key: keys.steamAPIKey,
+                appid: responseData[i].appid,
+                steamId
+            }})            
+            .then(response => {
+                // console.log(response.data.playerstats.achievements);
+                let achievementsAll = response.data.playerstats.achievements;
+                let achievementsCompleted = achievementsAll.filter(el => el.achieved === 1);
+                responseData[i].totalAchievements = achievementsAll.length;
+                responseData[i].completedAchievements = achievementsCompleted.length;
+            })
+            .catch(err => {
+                console.log("Error");
+                responseData[i].totalAchievements = "error";
+                responseData[i].completedAchievements = "error";
+            });
+            promiseArray.push(p1);
+            
             if (responseData[i].igdbId) {
                 const p2 = axios.get('https://api-v3.igdb.com/time_to_beats', {headers: {
                         'Accept': 'application/json',
@@ -149,7 +153,6 @@ router.get('/ownedGames/:steamId', (req, res) => {
         return Promise.all(promiseArray)
             .then(() => {
                 res.send(responseData);
-                console.log(responseData);
                 console.log("Trying to respond...");
             });
     })

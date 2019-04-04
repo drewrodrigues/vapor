@@ -92,7 +92,7 @@ router.get('/ownedGames/:steamId', (req, res) => {
                 if (game) {
                     responseData[i].igdbId = game.id;
                 } else {
-                    responseData[i].igbdId = "none";
+                    responseData[i].igbdId = null;
                 }
             })
             promiseArray.push(x);
@@ -123,28 +123,33 @@ router.get('/ownedGames/:steamId', (req, res) => {
                         'Accept': 'application/json',
                         'user-key': keys.igdbKey
                     }, 
-                        data: `fields *; where game = ${responseData[i].igdbId}; limit 50;`
+                    data: `fields *; where game = ${responseData[i].igdbId}; limit 50;`
                 })
                 .then(response => {
                     const { data } = response;
-                    console.log(data);
                     let normally = 0;
                     let normally_count = 0;
-                    data.forEach(el => {
-                        el.normally ? normally = normally + el.normally : '';
-                        el.normally ? normally_count++ : '';
-                    });
+                    for (let j = 0; j < data.length; j++) {
+                        data[j].normally ? normally += data[j].normally : '';
+                        data[j].normally ? normally_count++ : '';
+                    }
 
-                    normally = normally / normally_count;
-                    responseData[i].avgTimePlayed = normally / 3600;
+                    if (normally > 0 && normally_count > 0) {
+                        responseData[i].avgTimePlayed = Math.floor(normally / normally_count / 3600);
+                    } else {
+                        responseData[i].avgTimePlayed = -1;
+                    }
                 });
                 promiseArray.push(p2);
+            } else {
+                responseData[i].avgTimePlayed = -1;
             }
-            console.log(responseData);
+            responseData[i].playtime_forever = Math.ceil(responseData[i].playtime_forever / 60);
         }
         return Promise.all(promiseArray)
             .then(() => {
                 res.send(responseData);
+                console.log(responseData);
                 console.log("Trying to respond...");
             });
     })

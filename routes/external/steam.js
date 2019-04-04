@@ -34,7 +34,6 @@ router.get("/:id", (req, res) => {
 
 // get player's achievements for a game
 router.post('/player-achievements', (req, res) => {
-    console.log(req.body);
     axios({
         url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${req.body.appId}&key=${keys.steamAPIKey}&steamid=${req.body.steamId}`,
         method: `GET`,
@@ -74,6 +73,32 @@ router.get('/ownedGames/:steamId', (req, res) => {
         responseData[i].image_url = gameImageUrl;
       }
     })
+    .then(() => {
+        let promiseArray = [];
+        for (let i = 0; i < responseData.length; i++) {
+            const sani_name = responseData[i].name.replace(/[^0-9a-z'\s]/gi, ' ')
+                .replace(/[^0-9a-z\s]/gi, '')
+                .replace(/\s\s+/g, ' ')
+                .toLowerCase().split(" ").join("-");
+            const x = axios.get('https://api-v3.igdb.com/games', {
+                headers: {
+                    'Accept': 'application/json',
+                    'user-key': keys.igdbKey
+                },
+                data: `fields id; where slug = "${sani_name}";`
+            })
+            .then(response => {
+                const game = response.data[0];
+                if (game) {
+                    responseData[i].igdbId = game.id;
+                } else {
+                    responseData[i].igbdId = "none";
+                }
+            })
+            promiseArray.push(x);
+        }
+        return Promise.all(promiseArray);
+    })
     .then(() => { 
         let promiseArray = [];
         for (let i = 0; i < responseData.length; i++) {
@@ -93,28 +118,29 @@ router.get('/ownedGames/:steamId', (req, res) => {
             //     responseData[i].completedAchievements = achievementsCompleted.length;
             // });
             // promiseArray.push(p1);
+            if (responseData[i].igdbId) {
+                const p2 = axios.get('https://api-v3.igdb.com/time_to_beats', {headers: {
+                        'Accept': 'application/json',
+                        'user-key': keys.igdbKey
+                    }, 
+                        data: `fields *; where game = ${responseData[i].igdbId}; limit 50;`
+                })
+                .then(response => {
+                    const { data } = response;
+                    console.log(data);
+                    let normally = 0;
+                    let normally_count = 0;
+                    data.forEach(el => {
+                        el.normally ? normally = normally + el.normally : '';
+                        el.normally ? normally_count++ : '';
+                    });
 
-            const p2 = axios.get('https://api-v3.igdb.com/time_to_beats', {headers: {
-                    'Accept': 'application/json',
-                    'user-key': keys.igdbKey
-                }, params: {
-                    data: `fields *; where slug = ${responseData[i].name};`
-                }
-            })
-            .then(response => {
-                // const { data } = response;
-                // let normally = 0;
-                // let normally_count = 0;
-                // data.forEach(el => {
-                //     el.normally ? normally = normally + el.normally : '';
-                //     el.normally ? normally_count++ : '';
-                // });
-
-                // normally = normally / normally_count;
-                // responseData[i].avgTimePlayed = normally / 3600;
-                responseData[i].avgTimePlayed = response.data;
-            });
-            promiseArray.push(p2);
+                    normally = normally / normally_count;
+                    responseData[i].avgTimePlayed = normally / 3600;
+                });
+                promiseArray.push(p2);
+            }
+            console.log(responseData);
         }
         return Promise.all(promiseArray)
             .then(() => {

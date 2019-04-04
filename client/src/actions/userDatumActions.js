@@ -66,7 +66,7 @@ export const getOwnedGames = steamId => dispatch => {
   return steamApiUtil.getOwnedGames(steamId)
     .then(res => {
       dispatch(receiveOwnedGames(
-        res.data.filter(game => game.playtime_forever > 9)
+        res.data.filter(game => game.playtime_forever >= 9)
       ))
     })
     .catch(error => {

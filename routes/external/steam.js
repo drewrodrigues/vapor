@@ -5,9 +5,8 @@ const router   = express.Router()
 const axios    = require('axios')
 const keys = require('../../config/keys')
 
-const steamUrl = route => {
-  return `https://api.steampowered.com${route}/?key=${keys.steamAPIKey}`
-}
+const steamUrl = require('../helpers').steamUrl
+const getOwnedGames = require('../helpers').getOwnedGames
 
 // redirect to steam to authenticate
 router.get("/:id", (req, res) => {
@@ -47,6 +46,7 @@ router.get('/profile/:steamId', (req, res) => {
 
 // Get user's owned games with player achievements and average overall playtime
 router.get('/ownedGames/:steamId', (req, res) => {
+<<<<<<< HEAD
   var responseData;
   var steamId = req.params.steamId;
   axios.get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
@@ -79,6 +79,13 @@ router.get('/ownedGames/:steamId', (req, res) => {
     .catch(error => {
         res.send(error);
     });
+=======
+  getOwnedGames(req.params.steamId)
+  .then(games => {
+    return res.send(games)
+  })
+  .catch(error => console.log(error))
+>>>>>>> Pull helper methods into seperate file
 })
 
 module.exports = router;

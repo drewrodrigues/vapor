@@ -1,7 +1,9 @@
+import * as helpers from './steamHelpers';
+
 const express  = require('express')
 const router   = express.Router()
 const axios    = require('axios')
-const keys = require('../../config/keys');
+const keys = require('../../config/keys')
 
 const steamUrl = route => {
   return `https://api.steampowered.com${route}/?key=${keys.steamAPIKey}`
@@ -47,8 +49,7 @@ router.get('/profile/:steamId', (req, res) => {
 router.get('/ownedGames/:steamId', (req, res) => {
   var responseData;
   var steamId = req.params.steamId;
-  axios
-    .get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
+  axios.get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
       steamId,
       include_appinfo: 1,
       include_played_free_games: 1
@@ -61,84 +62,13 @@ router.get('/ownedGames/:steamId', (req, res) => {
       }
     })
     .then(() => {
-        let promiseArray = [];
-        for (let i = 0; i < responseData.length; i++) {
-            const sani_name = responseData[i].name.replace(/[^0-9a-z'\s]/gi, ' ')
-                .replace(/[^0-9a-z\s]/gi, '')
-                .replace(/\s\s+/g, ' ')
-                .toLowerCase().split(" ").join("-");
-            const x = axios.get('https://api-v3.igdb.com/games', {
-                headers: {
-                    'Accept': 'application/json',
-                    'user-key': keys.igdbKey
-                },
-                data: `fields id; where slug = "${sani_name}";`
-            })
-            .then(response => {
-                const game = response.data[0];
-                if (game) {
-                    responseData[i].igdbId = game.id;
-                } else {
-                    responseData[i].igbdId = null;
-                }
-            })
-            promiseArray.push(x);
-        }
-        return Promise.all(promiseArray).then();
+        helpers.getIgdbIds(responseData);
     })
     .then(() => { 
-        let promiseArray = [];
-        for (let i = 0; i < responseData.length; i++) {
-            // axios call to get achievements
-            const p1 = axios.get(`http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001`, { params: {
-                key: keys.steamAPIKey,
-                appid: responseData[i].appid,
-                steamId
-            }})            
-            .then(response => {
-                let achievementsAll = response.data.playerstats.achievements;
-                let achievementsCompleted = achievementsAll.filter(el => el.achieved === 1);
-                responseData[i].totalAchievements = achievementsAll.length;
-                responseData[i].completedAchievements = achievementsCompleted.length;
-            })
-            .catch(err => {
-                responseData[i].totalAchievements = "error";
-                responseData[i].completedAchievements = "error";
-            });
-            promiseArray.push(p1);
-            
-            if (responseData[i].igdbId) {
-                const p2 = axios.get('https://api-v3.igdb.com/time_to_beats', {headers: {
-                        'Accept': 'application/json',
-                        'user-key': keys.igdbKey
-                    }, 
-                    data: `fields *; where game = ${responseData[i].igdbId}; limit 50;`
-                })
-                .then(response => {
-                    const { data } = response;
-                    let normally = 0;
-                    let normally_count = 0;
-                    for (let j = 0; j < data.length; j++) {
-                        data[j].normally ? normally += data[j].normally : '';
-                        data[j].normally ? normally_count++ : '';
-                    }
-
-                    if (normally > 0 && normally_count > 0) {
-                        responseData[i].avgTimePlayed = Math.floor(normally / normally_count / 60);
-                    } else {
-                        responseData[i].avgTimePlayed = responseData[i].playtime_forever;
-                    }
-                });
-                promiseArray.push(p2);
-            } else {
-                responseData[i].avgTimePlayed = responseData[i].playtime_forever;
-            }
-        }
-        return Promise.all(promiseArray)
-            .then(() => {
-                res.send(responseData);
-                console.log("Trying to respond...");
-            });
+        helpers.getAchievementsAndAverageTimes(responseData, steamId);
+    })
+    .then(() => {
+        res.send(responseData);
     })
     .catch(error => {
         res.send(error);

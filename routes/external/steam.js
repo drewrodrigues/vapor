@@ -1,4 +1,4 @@
-import * as helpers from './steamHelpers';
+const helpers = require('./steamHelpers');
 
 const express  = require('express')
 const router   = express.Router()
@@ -62,10 +62,16 @@ router.get('/ownedGames/:steamId', (req, res) => {
       }
     })
     .then(() => {
-        helpers.getIgdbIds(responseData);
+        let promiseArray = [];
+        helpers.getIgdbIds(responseData, promiseArray);
+        
+        return Promise.all(promiseArray).then();
     })
     .then(() => { 
-        helpers.getAchievementsAndAverageTimes(responseData, steamId);
+        let promiseArray = [];
+        helpers.getAchievementsAndAverageTimes(responseData, steamId, promiseArray);
+        
+        return Promise.all(promiseArray)
     })
     .then(() => {
         res.send(responseData);

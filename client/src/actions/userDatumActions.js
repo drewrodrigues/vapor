@@ -41,7 +41,6 @@ export const clearProfile = () => dispatch => {
 
 export const getOwnedGames = steamId => dispatch => {
   return steamApiUtil.getOwnedGames(steamId)
-<<<<<<< HEAD
     .then(res => {
       dispatch(receiveOwnedGames(
         res.data.filter(game => game.playtime_forever >= 9)
@@ -50,8 +49,4 @@ export const getOwnedGames = steamId => dispatch => {
     .catch(error => {
       console.log(error)
     })
-=======
-    .then(res => dispatch(receiveOwnedGames(res.data)))
-    .catch(error => console.log(error))
->>>>>>> Send all owned games to frontend to select down later
 }

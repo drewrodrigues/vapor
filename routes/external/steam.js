@@ -7,6 +7,10 @@ const keys = require('../../config/keys')
 
 const steamUrl = require('../helpers').steamUrl
 const getOwnedGames = require('../helpers').getOwnedGames
+const generateGamesIconUrl = require('../helpers').generateGamesIconUrl
+
+const User = require('../../models/User')
+const Game = require('../../models/Game')
 
 // redirect to steam to authenticate
 router.get("/:id", (req, res) => {
@@ -46,46 +50,46 @@ router.get('/profile/:steamId', (req, res) => {
 
 // Get user's owned games with player achievements and average overall playtime
 router.get('/ownedGames/:steamId', (req, res) => {
-<<<<<<< HEAD
-  var responseData;
-  var steamId = req.params.steamId;
-  axios.get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
-      steamId,
-      include_appinfo: 1,
-      include_played_free_games: 1
-    }})
-    .then(response => {
-      responseData = response.data.response.games;
-      for (let i = 0; i < responseData.length; i++){
-        let gameImageUrl = `http://media.steampowered.com/steamcommunity/public/images/apps/${responseData[i].appid}/${responseData[i].img_logo_url}.jpg`
-        responseData[i].image_url = gameImageUrl;
-      }
-    })
-    .then(() => {
-        let promiseArray = [];
-        helpers.getIgdbIds(responseData, promiseArray);
-        
-        return Promise.all(promiseArray).then();
-    })
-    .then(() => { 
-        let promiseArray = [];
-        helpers.getAchievementsAndAverageTimes(responseData, steamId, promiseArray);
-        
-        return Promise.all(promiseArray)
-    })
-    .then(() => {
-        res.send(responseData);
-    })
-    .catch(error => {
-        res.send(error);
-    });
-=======
-  getOwnedGames(req.params.steamId)
-  .then(games => {
-    return res.send(games)
+  // check last updated - if within a day, respond with DB games
+  // otherwise updates user's games through Steam API
+  User.findOne({ steamId: req.params.steamId }).populate('games').exec((err, user) => {
+    // already updated
+    if (user.updatedDaysAgo === 0) {
+      res.send(user.games)
+    } else {
+      // needs to update
+      // create game records and store within user
+      let responseData;
+      let steamId = req.params.steamId;
+
+      getOwnedGames(req.params.steamId)
+          .then(games => {
+              responseData = games.data.response.games
+              generateGamesIconUrl(responseData)
+              let promiseArray = [];
+              helpers.getIgdbIds(responseData, promiseArray);
+              return Promise.all(promiseArray).then();
+          })
+          .then(() => { 
+              let promiseArray = [];
+              helpers.getAchievementsAndAverageTimes(responseData, steamId, promiseArray);
+              
+              return Promise.all(promiseArray)
+          })
+          .then(() => {
+            Game.insertMany(responseData)
+            .then(docs => {
+              user.games = docs
+              user.updatedDaysAgo = 0
+              responseData = user.games
+              return user.save(err => res.send(user.games))
+            })
+          })
+          .catch(error => {
+              res.send(user.games);
+          });
+    }
   })
-  .catch(error => console.log(error))
->>>>>>> Pull helper methods into seperate file
 })
 
 module.exports = router;

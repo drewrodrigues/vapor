@@ -1,6 +1,5 @@
 import * as steamApiUtil from '../util/userDatumUtil';
 
-// export const RECEIVE_PLAYER_GAME_ACHIEVEMENTS = "RECEIVE_PLAYER_GAME_ACHIEVEMENTS";
 export const RECEIVE_OWNED_GAMES = "RECEIVE_OWNED_GAMES";
 
 export const RECEIVE_PROFILE = "RECEIVE_PROFILE"

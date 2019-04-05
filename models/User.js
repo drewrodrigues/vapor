@@ -2,8 +2,6 @@ const mongoose = require('mongoose')
 const Schema   = mongoose.Schema
 const Game = require('./Game')
 
-const oneWeekInMiliseconds = 604800000
-
 const UserSchema = new Schema({
   name: {
     type: String
@@ -15,12 +13,8 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
-  totalTimePlayed: {
-    type: Number,
-    default: 0
-  },
   games: [{ type: Schema.Types.ObjectId, ref: 'games' }],
-  updated: { type: Date, default: Date.now - oneWeekInMiliseconds }
+  updatedDaysAgo: { type: Number, default: 1 }
 })
 
 module.exports = User = mongoose.model('users', UserSchema)

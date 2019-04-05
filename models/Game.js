@@ -5,12 +5,26 @@ const GameSchema = new Schema({
   name: {
     type: String
   },
-  imageUrl: {
+  appid: {
+    type: Number
+  },
+  igdbId: {
+    type: Number
+  },
+  image_url: {
     type: String
   },
-  timePlayed: {
-    type: Number,
-    default: 0
+  playtime_forever: {
+    type: Number
+  },
+  totalAchievements: {
+    type: Number
+  },
+  completedAchievements: {
+    type: Number
+  },
+  avgTimePlayed: {
+    type: Number
   }
 })
 

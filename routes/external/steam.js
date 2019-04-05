@@ -32,20 +32,6 @@ router.get("/:id", (req, res) => {
         });
 })
 
-// get player's achievements for a game
-router.post('/player-achievements', (req, res) => {
-    axios({
-        url: `http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${req.body.appId}&key=${keys.steamAPIKey}&steamid=${req.body.steamId}`,
-        method: `GET`,
-        // key: keys.steamAPIKey,
-        // appid: req.body.appId,
-        // steamid: req.body.steamId,
-        format: 'json'
-    })
-        .then(apiRes => res.json(apiRes.data))
-        .catch(err => console.log(err));
-});
-
 router.get('/profile/:steamId', (req, res) => {
   axios
     .get(steamUrl("/ISteamUser/GetPlayerSummaries/v2"), { params: {
@@ -57,9 +43,10 @@ router.get('/profile/:steamId', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// Get user's owned games with player achievements and average overall playtime
 router.get('/ownedGames/:steamId', (req, res) => {
-    var responseData;
-    var steamId = req.params.steamId;
+  var responseData;
+  var steamId = req.params.steamId;
   axios
     .get(steamUrl("/IPlayerService/GetOwnedGames/v1"), { params: {
       steamId,
@@ -97,7 +84,7 @@ router.get('/ownedGames/:steamId', (req, res) => {
             })
             promiseArray.push(x);
         }
-        return Promise.all(promiseArray);
+        return Promise.all(promiseArray).then();
     })
     .then(() => { 
         let promiseArray = [];
@@ -109,14 +96,12 @@ router.get('/ownedGames/:steamId', (req, res) => {
                 steamId
             }})            
             .then(response => {
-                // console.log(response.data.playerstats.achievements);
                 let achievementsAll = response.data.playerstats.achievements;
                 let achievementsCompleted = achievementsAll.filter(el => el.achieved === 1);
                 responseData[i].totalAchievements = achievementsAll.length;
                 responseData[i].completedAchievements = achievementsCompleted.length;
             })
             .catch(err => {
-                console.log("Error");
                 responseData[i].totalAchievements = "error";
                 responseData[i].completedAchievements = "error";
             });
@@ -139,16 +124,15 @@ router.get('/ownedGames/:steamId', (req, res) => {
                     }
 
                     if (normally > 0 && normally_count > 0) {
-                        responseData[i].avgTimePlayed = Math.floor(normally / normally_count / 3600);
+                        responseData[i].avgTimePlayed = Math.floor(normally / normally_count / 60);
                     } else {
-                        responseData[i].avgTimePlayed = -1;
+                        responseData[i].avgTimePlayed = responseData[i].playtime_forever;
                     }
                 });
                 promiseArray.push(p2);
             } else {
-                responseData[i].avgTimePlayed = -1;
+                responseData[i].avgTimePlayed = responseData[i].playtime_forever;
             }
-            responseData[i].playtime_forever = Math.ceil(responseData[i].playtime_forever / 60);
         }
         return Promise.all(promiseArray)
             .then(() => {

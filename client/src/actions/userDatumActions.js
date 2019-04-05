@@ -6,22 +6,6 @@ export const RECEIVE_OWNED_GAMES = "RECEIVE_OWNED_GAMES";
 export const RECEIVE_PROFILE = "RECEIVE_PROFILE"
 export const REMOVE_PROFILE = "REMOVE_PROFILE"
 
-// const recieveOwnedGames = (ownedGames, gamesAndTimes) => ({
-  //     type: RECEIVE_OWNED_GAMES,
-  //     // format = array appIds
-  //     ownedGames,
-  //     // format = array of objects {appId, playtime_forever(in min)}
-  //     gamesAndTimes,
-  // });
-
-              // const recievePlayerGameAchievements = (achievements, gameName) => ({
-              //     type: RECEIVE_PLAYER_GAME_ACHIEVEMENTS,
-              //     // format = array of objects
-              //     achievements,
-              //     // format = string
-              //     gameName,
-              // });
-
 const receiveProfile = profile => {
   return {
     type: RECEIVE_PROFILE,
@@ -41,12 +25,6 @@ const receiveOwnedGames = ownedGames => {
     ownedGames
   }
 }
-
-// export const getPlayerGameAchievements = (steamId, appId) => dispatch => (
-//     steamApiUtil.getPlayerGameAchievements(steamId, appId)
-//         .then(res => dispatch(recievePlayerGameAchievements(res.data.playerstats.achievements,
-//             res.data.playerstats.gameName)))
-// );
 
 export const getProfile = steamId => dispatch => {
   return steamApiUtil.getProfile(steamId)

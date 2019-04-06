@@ -54,7 +54,7 @@ router.get('/ownedGames/:steamId', (req, res) => {
   // otherwise updates user's games through Steam API
   User.findOne({ steamId: req.params.steamId }).populate('games').exec((err, user) => {
     // already updated
-    if (user.updatedDaysAgo === 0) {
+    if (!user.needsUpdate) {
       res.send(user.games)
     } else {
       // needs to update
@@ -80,7 +80,7 @@ router.get('/ownedGames/:steamId', (req, res) => {
             Game.insertMany(responseData)
             .then(docs => {
               user.games = docs
-              user.updatedDaysAgo = 0
+              user.updated = Date.now()
               responseData = user.games
               return user.save(err => res.send(user.games))
             })

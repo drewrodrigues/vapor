@@ -16,10 +16,12 @@ const DedicationScore = ({ games }) => {
             if (game.completedAchievements === "error") {
 
             } else {
-              totalHoursPlayed += game.playtime_forever;
-              totalAvgPlayed += game.avgTimePlayed;
-              totalAchievements += game.totalAchievements;
-              totalAchieved += game.completedAchievements;
+              if (game.playtime_forever > 599) {
+                totalHoursPlayed += game.playtime_forever;
+                totalAvgPlayed += game.avgTimePlayed;
+                totalAchievements += game.totalAchievements;
+                totalAchieved += game.completedAchievements;
+              }
             }
 
           dedicationScore = Math.floor((50 * totalHoursPlayed / totalAvgPlayed) + (50 * totalAchieved / totalAchievements));

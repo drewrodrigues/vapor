@@ -4,7 +4,7 @@ import Dashboard from './dashboard'
 import {
   getProfile,
   clearProfile,
-  getOwnedGames, 
+  getOwnedGames
 } from '../actions/userDatumActions'
 
 import { totalTimePlayed } from '../reducers/selectors'

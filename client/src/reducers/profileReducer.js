@@ -1,7 +1,7 @@
 import {
   RECEIVE_PROFILE,
   REMOVE_PROFILE,
-  RECEIVE_OWNED_GAMES, 
+  RECEIVE_OWNED_GAMES
 } from '../actions/userDatumActions'
 
 const profileReducer = (oldState = {}, action) => {

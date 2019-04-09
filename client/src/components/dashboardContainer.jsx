@@ -7,15 +7,18 @@ import {
   getOwnedGames
 } from '../actions/userDatumActions'
 
-import { totalTimePlayed } from '../reducers/selectors'
+import { 
+  topGames,
+  totalTimePlayed
+} from '../reducers/selectors'
 
 const mapStateToProps = state => {
   const { profile } = state.entities
   return {
     avatarUrl: profile.avatarfull,
     name: profile.realname,
-    ownedGames: profile.ownedGames,
     steamId: state.session.user.steamId,
+    topGames: topGames(profile.ownedGames),
     totalTimePlayed: totalTimePlayed(profile.ownedGames),
     username: profile.personaname
   }

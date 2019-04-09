@@ -44,8 +44,8 @@ module.exports = {
           gameArray[i].completedAchievements = achievementsCompleted.length;
         })
         .catch(err => {
-          gameArray[i].totalAchievements = "error";
-          gameArray[i].completedAchievements = "error";
+          gameArray[i].totalAchievements = null;
+          gameArray[i].completedAchievements = null;
         });
       promiseArray.push(p1);
 

@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
 	}
 
 	render() {
-		const { avatarUrl, name, ownedGames, totalTimePlayed, username } = this.props
+		const { avatarUrl, name, topGames, totalTimePlayed, username } = this.props
 
 		return (
 			<div class="container dashboard">
@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
 					totalTimePlayed={ totalTimePlayed } 
 					username={ username } />
 
-				<TopGames games={ ownedGames } />
+				<TopGames games={ topGames } />
 			</div>
 		)
 	}

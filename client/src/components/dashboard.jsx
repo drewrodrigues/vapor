@@ -25,8 +25,8 @@ class Dashboard extends React.Component {
 					totalTimePlayed={ totalTimePlayed } 
 					username={ username } />
 
-				<TopGames games={ ownedGames } />
-				<DedicationScore games={ ownedGames } /> 
+				<TopGames games={ topGames } />
+				<DedicationScore games={ topGames } /> 
 			</div>
 		)
 	}

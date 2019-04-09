@@ -2,6 +2,7 @@ import React from 'react'
 
 import Profile from './dashboard/profile'
 import TopGames from './dashboard/topGames'
+import DedicationScore from './dashboard/dedicationScore'
 
 class Dashboard extends React.Component {
 	componentDidMount() {
@@ -24,7 +25,8 @@ class Dashboard extends React.Component {
 					totalTimePlayed={ totalTimePlayed } 
 					username={ username } />
 
-				<TopGames games={ topGames } />
+				<TopGames games={ ownedGames } />
+				<DedicationScore games={ ownedGames } /> 
 			</div>
 		)
 	}

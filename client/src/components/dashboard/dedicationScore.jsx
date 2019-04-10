@@ -28,12 +28,11 @@ const DedicationScore = ({ games }) => {
           dedicationScore = Math.floor((50 * totalHoursPlayed / totalAvgPlayed) + (50 * totalAchieved / totalAchievements));
           })
         }
+          <h2 className="dashboard-dedication-score-title">Dedication Score: {dedicationScore}</h2>
           <DedicationScoreGraph 
             playTimeScore={Math.floor(50 * totalHoursPlayed / totalAvgPlayed)}
             achievementScore={Math.floor(50 * totalAchieved / totalAchievements)}
             />
-        Total Gametime Hours Played: {Math.floor(totalHoursPlayed / 60)}  |  Earned Achievements: {totalAchieved}  <br></br>
-          Dedication Score: <b>{dedicationScore}</b>
       </section>
     </>)} else {return (<section>Please have some games brah.</section>)}
 }

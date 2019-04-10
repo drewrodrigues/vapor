@@ -35,9 +35,8 @@ class DedicationScoreGraph extends React.Component {
     series.dataFields.category = "name";
     series.alignLabels = true;
     // this makes only A label to be visible
-    series.labels.template.propertyFields.disabled = "disabled";
-    series.ticks.template.propertyFields.disabled = "disabled";
-
+    series.labels.template.disabled = true;
+    series.ticks.template.disabled = true;
 
     series.maskSprite.path = iconPath;
     series.ticks.template.locationX = 1;

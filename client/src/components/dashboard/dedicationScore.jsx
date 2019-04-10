@@ -1,4 +1,5 @@
 import React from 'react';
+import DedicationScoreGraph from './dedication_score_graph';
 
 const DedicationScore = ({ games }) => {
   let totalHoursPlayed = 0;
@@ -27,7 +28,11 @@ const DedicationScore = ({ games }) => {
           dedicationScore = Math.floor((50 * totalHoursPlayed / totalAvgPlayed) + (50 * totalAchieved / totalAchievements));
           })
         }
-        Dedication Score: {dedicationScore}
+          <h2 className="dashboard-dedication-score-title">Dedication Score: {dedicationScore}</h2>
+          <DedicationScoreGraph 
+            playTimeScore={Math.floor(50 * totalHoursPlayed / totalAvgPlayed)}
+            achievementScore={Math.floor(50 * totalAchieved / totalAchievements)}
+            />
       </section>
     </>)} else {return (<section>Please have some games brah.</section>)}
 }

@@ -28,8 +28,10 @@ const DedicationScore = ({ games }) => {
           dedicationScore = Math.floor((50 * totalHoursPlayed / totalAvgPlayed) + (50 * totalAchieved / totalAchievements));
           })
         }
-          <h2 className="dashboard-dedication-score-title">Dedication Score: {dedicationScore
-          } &nbsp; <i class="fas fa-info-circle"></i></h2>
+          <p className="dashboard-dedication-score-title">Dedication Score: {dedicationScore
+          } &nbsp; <i class="fas fa-info-circle">
+            <span class="dedication-score-info-text">Dedication score is a reflection of how dedicated a user is to their played games. It is an aggregate of total hours played vs. average hours played and achievements unlocked vs total achievements, for every game in your library (with over 9 hours played).</span>
+          </i></p>
           <DedicationScoreGraph 
             playTimeScore={Math.floor(50 * totalHoursPlayed / totalAvgPlayed) || 0}
             achievementScore={Math.floor(50 * totalAchieved / totalAchievements) || 0}

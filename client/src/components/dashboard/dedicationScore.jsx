@@ -28,10 +28,11 @@ const DedicationScore = ({ games }) => {
           dedicationScore = Math.floor((50 * totalHoursPlayed / totalAvgPlayed) + (50 * totalAchieved / totalAchievements));
           })
         }
-          <h2 className="dashboard-dedication-score-title">Dedication Score: {dedicationScore}</h2>
+          <h2 className="dashboard-dedication-score-title">Dedication Score: {dedicationScore
+          } &nbsp; <i class="fas fa-info-circle"></i></h2>
           <DedicationScoreGraph 
-            playTimeScore={Math.floor(50 * totalHoursPlayed / totalAvgPlayed)}
-            achievementScore={Math.floor(50 * totalAchieved / totalAchievements)}
+            playTimeScore={Math.floor(50 * totalHoursPlayed / totalAvgPlayed) || 0}
+            achievementScore={Math.floor(50 * totalAchieved / totalAchievements) || 0}
             />
       </section>
     </>)} else {return (<section>Please have some games brah.</section>)}

@@ -35,18 +35,20 @@
 }
 
 #dedication-score-chartdiv text, #dedication-score-chartdiv input {
-  margin-top: 50px;
-  margin-bottom: 50px;
   color: #fff;
   fill: #fff;
 }
 
 #dedication-score-chartdiv {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .dashboard-dedication-score-title {
   margin-left: 200px;
   margin-top: 50px;
+}
+
+.fa-info-circle {
+  cursor: pointer;
 }

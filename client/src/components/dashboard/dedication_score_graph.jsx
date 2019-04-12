@@ -49,6 +49,7 @@ class DedicationScoreGraph extends React.Component {
     this.chart = chart;
   }
 
+<<<<<<< HEAD
   componentDidUpdate() {
     this.chart.data = [{
       "name": "Playtime Score",
@@ -60,6 +61,8 @@ class DedicationScoreGraph extends React.Component {
     }];
   }
 
+=======
+>>>>>>> Remove comment and console log
   componentWillUnmount() {
     if (this.chart) {
       this.chart.dispose();

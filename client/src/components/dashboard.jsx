@@ -8,6 +8,7 @@ class Dashboard extends React.Component {
 	componentDidMount() {
 		this.props.getProfile(this.props.steamId)
 		this.props.getOwnedGames(this.props.steamId)
+		this.props.getStats()
 	}
 
 	componentWillUnmount() {

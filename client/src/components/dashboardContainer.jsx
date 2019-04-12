@@ -6,6 +6,7 @@ import {
   clearProfile,
   getOwnedGames
 } from '../actions/userDatumActions'
+import { getStats } from '../actions/statActions'
 
 import { 
   topGames,
@@ -28,7 +29,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getProfile: steamId => dispatch(getProfile(steamId)),
     getOwnedGames: steamId => dispatch(getOwnedGames(steamId)),
-    clearProfile: () => dispatch(clearProfile())
+    clearProfile: () => dispatch(clearProfile()),
+    getStats: () => dispatch(getStats())
   }
 }
 

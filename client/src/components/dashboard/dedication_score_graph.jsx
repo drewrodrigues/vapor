@@ -56,12 +56,6 @@ class DedicationScoreGraph extends React.Component {
     this.chart = chart;
   }
 
-  // componentWillUpdate() {
-  //   this.chart.data[0].value = this.props.playTimeScore;
-  //   this.chart.data[1].value = this.props.achievementScore;
-  //   console.log(this.props.playTimeScore + " x " + this.props.achievementScore);
-  // }
-
   componentWillUnmount() {
     if (this.chart) {
       this.chart.dispose();
@@ -69,7 +63,6 @@ class DedicationScoreGraph extends React.Component {
   }
 
   render() {
-    console.log(this.props.playTimeScore);
     return (
       <div id="dedication-score-chartdiv" style={{ width: "100%", height: "500px"}}></div>
     );

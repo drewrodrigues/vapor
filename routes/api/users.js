@@ -6,17 +6,24 @@ const keys     = require('../../config/keys')
 const passport = require('passport')
 
 const getUserAverages = users => {
+  let totalUsers = users.length
   let totalPlaytime = 0
   let totalAchievements = 0
+  let totalGames = 0
+
   users.forEach(user => {
+    totalGames += user.games.length
     user.games.forEach(game => {
       totalPlaytime += game.playtime_forever || 0
       totalAchievements += game.completedAchievements || 0
     })
   })
+
   return {
-    averagePlaytime: Math.floor(totalPlaytime / users.length),
-    averageAchievements: Math.floor(totalAchievements / users.length)
+    averagePlaytime: Math.floor(totalPlaytime / totalUsers / 60),
+    averageAchievements: Math.floor(totalAchievements / totalUsers),
+    averageGames: Math.floor(totalGames / totalUsers),
+    totalUsers: totalUsers
   }
 }
 

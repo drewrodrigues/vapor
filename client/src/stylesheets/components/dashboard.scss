@@ -1,27 +1,30 @@
 .dashboard {
   margin-top: 100px;
   background: #222;
-  padding: 20px;
+  padding: 20px 0;
   border-radius: 5px;
+  box-shadow: 0 0 10px black;
+  margin-bottom: 50px;
 }
 
 .dashboard-avatar {
-  border-radius: 50%; 
   margin-top: -100px;
-  float: left;
+  margin-left: 20px;
   margin-right: 20px;
+  float: left;
+  box-shadow: 0 0 5px black;
 }
 
 .dashboard-name {
-  margin-bottom: 10px;
+  color: #555;
+}
+
+.dashboard-username {
+  font-size: 32px;
 }
 
 .dashboard-timePlayed {
   font-size: 12px;
-}
-
-.dashboard-topGames {
-  margin-top: 50px;
 }
 
 .dashboard-topGames-title {
@@ -31,7 +34,9 @@
 
 .dashboard-ownedGame {
   display: inline-block;
-  border-radius: 5px;
+  width: 20%;
+  margin-bottom: -4px;
+  border: 1px solid #000;
 }
 
 #dedication-score-chartdiv text, #dedication-score-chartdiv input {
@@ -77,4 +82,55 @@
 
 .fa-info-circle:hover .dedication-score-info-text {
   visibility: visible;
+}
+
+.dashboard-header {
+  margin-bottom: 20px;
+}
+
+.orange {
+  color: #e67e22;
+}
+
+.blue {
+  color: #3498db;
+}
+
+.green {
+  color: #2ecc71;
+}
+
+.red {
+  color: #e74c3c;
+}
+
+.dashboard-stat {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  background: #111;
+  border: 1px solid #000;
+  vertical-align: top;
+}
+
+.dashboard-stat-title {
+  font-size: 12px;
+  background: #000;
+  margin-bottom: 25px;
+  padding: 15px 0;
+  border: 1px solid #111;
+}
+
+.dashboard-stat-user {
+  font-weight: 700;
+  font-size: 48px;
+  display: block;
+}
+
+.dashboard-stat-average {
+  font-size: 10px;
+  color: #555;
+  display: block;
+  padding-bottom: 25px;
 }

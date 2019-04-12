@@ -3,20 +3,28 @@ import Profile from './profile'
 import { getStats } from '../../actions/statActions'
 import { getProfile, clearProfile } from '../../actions/userDatumActions'
 
-import { totalTimePlayed } from '../../reducers/selectors'
+import {
+  totalAchievements,
+  totalTimePlayed,
+  percentageAchievementsCompleted
+} from '../../reducers/selectors'
 
 const mapStateToProps = state => {
   const { profile, stats } = state.entities
 
   return {
     avatarUrl: profile.avatarfull,
+    achievements: totalAchievements(profile.ownedGames),
+    percentageAchievementsCompleted: percentageAchievementsCompleted(profile.ownedGames),
     averageAchievements: stats.averageAchievements,
     averageGames: stats.averageGames,
     averagePlaytime: stats.averagePlaytime,
     name: profile.realname,
     steamId: state.session.user.steamId,
     username: profile.personaname,
-    totalTimePlayed: totalTimePlayed(profile.ownedGames)
+    totalAchievements: totalAchievements(profile.ownedGames),
+    totalTimePlayed: totalTimePlayed(profile.ownedGames),
+    totalGames: profile.ownedGames ? profile.ownedGames.length : 0
   }
 }
 

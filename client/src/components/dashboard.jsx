@@ -1,31 +1,20 @@
 import React from 'react'
 
-import Profile from './dashboard/profile'
+import ProfileContainer from './dashboard/profileContainer'
 import TopGames from './dashboard/topGames'
 import DedicationScore from './dashboard/dedicationScore'
 
 class Dashboard extends React.Component {
 	componentDidMount() {
-		this.props.getProfile(this.props.steamId)
 		this.props.getOwnedGames(this.props.steamId)
-		this.props.getStats()
-	}
-
-	componentWillUnmount() {
-		this.props.clearProfile()
 	}
 
 	render() {
-		const { avatarUrl, name, topGames, totalTimePlayed, username } = this.props
+		const { topGames } = this.props
 
 		return (
-			<div class="container dashboard">
-				<Profile 
-					avatarUrl={ avatarUrl } 
-					name={ name } 
-					totalTimePlayed={ totalTimePlayed } 
-					username={ username } />
-
+			<div className="container dashboard">
+				<ProfileContainer />
 				<TopGames games={ topGames } />
 				<DedicationScore games={ topGames } /> 
 			</div>

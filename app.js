@@ -27,6 +27,7 @@ const passport   = require('passport')
 const auth       = require('./routes/api/auth')
 const igdb       = require('./routes/external/igdb')
 const steam      = require('./routes/external/steam')
+const users      = require('./routes/api/users')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(passport.initialize())
@@ -36,6 +37,7 @@ app.use(bodyParser.json())
 
 // - routes
 app.use('/api/auth', auth)
+app.use('/api/users', users)
 app.use('/external/igdb', igdb)
 app.use('/external/steam', steam)
 

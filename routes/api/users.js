@@ -5,6 +5,28 @@ const jwt      = require('jsonwebtoken')
 const keys     = require('../../config/keys')
 const passport = require('passport')
 
+const getUserAverages = users => {
+  let totalUsers = users.length
+  let totalPlaytime = 0
+  let totalAchievements = 0
+  let totalGames = 0
+
+  users.forEach(user => {
+    totalGames += user.games.length
+    user.games.forEach(game => {
+      totalPlaytime += game.playtime_forever || 0
+      totalAchievements += game.completedAchievements || 0
+    })
+  })
+
+  return {
+    averagePlaytime: Math.floor(totalPlaytime / totalUsers / 60),
+    averageAchievements: Math.floor(totalAchievements / totalUsers),
+    averageGames: Math.floor(totalGames / totalUsers),
+    totalUsers: totalUsers
+  }
+}
+
 router.post('/login', (req, res) => {
   User.findOne({ steamId: req.body.steamId })
     .then(user => {
@@ -24,6 +46,18 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
     id: req.user.id,
     steamId: req.user.steamId
   })
+})
+
+router.get('/stats', (req, res) => {
+  User.find({}).populate('games')
+    .then(users => {
+      res.send(getUserAverages(users))
+    })
+})
+
+router.get('/', (req, res) => {
+  User.find({}).populate('games')
+    .then(users => res.send(users))
 })
 
 // helpers --------------------------------------------------------------------

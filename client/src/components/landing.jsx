@@ -5,6 +5,7 @@ import TTB  from '../components/game/ttb'
 import GameInfo from '../components/game/gameInfo'
 import SimilarGamesRow from './game/similarGamesRow';
 import Popularity from './game/popularity';
+import Searchbar from './search/searchbar'
 
 const Landing = ({ backgroundFetched, game }) => {
   let games = [];
@@ -15,8 +16,16 @@ const Landing = ({ backgroundFetched, game }) => {
   
 
   return (
-    <>
+    <div className="container">
       <section className="landing"> 
+        <section className="landing-jumbo">
+          <h2 className="landing-jumbo-subtitle">FIND SICK GAMES</h2>
+          <h1 className="landing-jumbo-title">VAPOR</h1>
+          <div className="landing-jumbo-searchContainer">
+            <i class="fas fa-search"></i>
+            <input className="landing-jumbo-searchbar" placeholder="Search a game..." autoFocus/>
+          </div>
+        </section>
       {backgroundFetched ? (
         <>
           <div className="game-title-container">
@@ -36,7 +45,7 @@ const Landing = ({ backgroundFetched, game }) => {
           ) : null}
           <Screenshot />
         </section>
-    </>
+    </div>
   )
 
 }

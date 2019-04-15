@@ -1,14 +1,39 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(53, 53, 53, 0.3);
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  font-family: 'Orbitron', sans-serif;
-  padding: 10px;
+  padding: 20px;
+  margin-bottom: 150px;
+  position: relative;
+  font-size: 14px;
+}
 
+.vapor-title {
+  color: #A6E22E;
+}
 
-  .vapor-title {
-    margin-left: 10px;
+.session {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+
+  a,
+  button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    text-transform: uppercase;
+    background: none;
+    font-size: 12px;
+    margin-left: 5px;
+    border-radius: 5px;
+    color: #555;
+    transition: color 0.5s;
+
+    &:hover {
+      color: white;
+    }
+
+    &.active {
+      color: white;
+      cursor: initial;
+    }
   }
 }

@@ -1,6 +1,6 @@
-
 body {
   background: #111111;
+  background: url('../assets/jumbo.png') repeat;
 }
 
 #root {
@@ -30,7 +30,58 @@ body {
       font-size: 44px;
     }
   }
+}
 
-  .game-vis{
+.landing-jumbo {
+  text-align: center;
+}
+
+.landing-jumbo-subtitle {
+  color: #A6E22E;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: -10px;
+  letter-spacing: 24px;
+  text-shadow: 0 0 10px black;
+}
+
+.landing-jumbo-title {
+  color: white;
+  font-size: 150px;
+  text-shadow: 0 0 50px black;
+}
+
+.landing-jumbo-searchContainer {
+  background: #A6E22E;
+  max-width: 600px;
+  box-shadow: 0 0 10px #A6E22E;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 auto;
+  text-align: left;
+
+  i {
+    color: white;
+    font-size: 20px;
+    padding: 17px;
+    float: right;
+    
+    &:hover {
+      cursor: pointer;
+    }
   }
+}
+
+.landing-jumbo-searchbar {
+  width: 80%;
+  background: none;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+::placeholder {
+  color: white;
 }

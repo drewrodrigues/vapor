@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { logout } from '../actions/sessionActions'
 
 import SteamSignInButtom from '../assets/steam-sign-in.png'
-import Searchbar from './search/searchbar';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class Navbar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div className="session">
-          <Link to="/">Search</Link>
+          <Link to="/" className="active">Search</Link>
           <Link to="/dashboard">Dashboard</Link>
           <button onClick={ this.logoutUser }>Logout</button>
         </div>
@@ -49,8 +48,7 @@ class Navbar extends React.Component {
   render() {
     return(
       <nav className="navbar">
-        <h3 className="vapor-title">Vapor</h3>
-        <Searchbar />
+        <h3 className="vapor-title">VAPOR</h3>
         { this.getLinks() }
       </nav>
     )

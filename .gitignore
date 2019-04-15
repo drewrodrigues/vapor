@@ -6,3 +6,5 @@ client/package-lock.json
 /node_modules
 /package-lock.json
 keys.js
+*.DS_Store
+*.swp

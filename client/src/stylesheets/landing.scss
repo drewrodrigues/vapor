@@ -30,6 +30,13 @@ body {
       font-size: 44px;
     }
   }
+
+  .underlined{
+    margin-bottom: 20px;
+    box-shadow: 0 5px 10px #A6E22E;
+    height: 1px;
+    background: #A5E22F;
+  }
 }
 
 .landing-jumbo {
@@ -43,6 +50,11 @@ body {
   margin-bottom: -10px;
   letter-spacing: 24px;
   text-shadow: 0 0 10px black;
+}
+
+.landing-item-title{
+  margin-top: 20px;
+  width: 300px;
 }
 
 .landing-jumbo-title {

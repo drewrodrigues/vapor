@@ -10,13 +10,18 @@ const SimilarGamesRow = ({ similarGames }) => {
   }
   return (
     similarGames ? (
-      <div className="similar-games-row-container">
-        <div className="similar-games-title">Similar Games</div>
-        <ul className="similar-games-row">
-          {similarGames.sort(popularityCompare).map(game => {
-            return <GameItem key={game.id} game={game}/>
-          })}
-        </ul>
+      <div className="similar-games-wrapper">
+        <div className="landing-item-title" style={{ "margin-left": "auto", "margin-right": "auto"}}>
+          <p className="landing-ttb-score-title">Similar Games</p>
+          <div className="underlined"></div>
+        </div>
+        <div className="similar-games-row-container">
+          <ul className="similar-games-row">
+            {similarGames.sort(popularityCompare).map(game => {
+              return <GameItem key={game.id} game={game}/>
+            })}
+          </ul>
+        </div>
       </div>
     ) : (
       null

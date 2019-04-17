@@ -17,10 +17,13 @@ const Popularity = ({games}) => {
     })
   })
   return (
-    <>
-      <h1>Popularity</h1>
+    <div className="popularity-wrapper">
+      <div className="landing-item-title">
+        <p>Similar Games Popularity</p>
+        <div className="underlined"></div>
+      </div>
       <PopularityGraph data={data} />
-    </>
+    </div>
   )
 }
 

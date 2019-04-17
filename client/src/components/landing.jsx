@@ -22,7 +22,7 @@ const Landing = ({ backgroundFetched, game }) => {
           <h2 className="landing-jumbo-subtitle">FIND SICK GAMES</h2>
           <h1 className="landing-jumbo-title">VAPOR</h1>
           <div className="landing-jumbo-searchContainer">
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
             <Searchbar />
           </div>
         </section>
@@ -36,11 +36,11 @@ const Landing = ({ backgroundFetched, game }) => {
             <GameInfo game={game}/>
             {game.igdb_id ?
               <div className="game-vis">
-                <Popularity games={games} />
                 <TTB game={game} />
+                <SimilarGamesRow />
+                <Popularity games={games} />
               </div>
               : null}
-            <SimilarGamesRow />
           </section>
         </>
           ) : null}

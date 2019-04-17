@@ -10,8 +10,8 @@
     height: 100%;
     
     .similar-game-thumb {
-      // height: 90%;
-      width: 18vw;
+      height: 200px;
+      min-width: 300px;
       object-fit: contain;
     }
   }

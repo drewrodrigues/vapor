@@ -11,7 +11,7 @@ const SimilarGamesRow = ({ similarGames }) => {
   return (
     similarGames ? (
       <div className="similar-games-wrapper">
-        <div className="landing-item-title" style={{ "margin-left": "auto", "margin-right": "auto"}}>
+        <div className="landing-item-title" style={{ marginLeft: "auto", marginRight: "auto"}}>
           <p className="landing-ttb-score-title">Similar Games</p>
           <div className="underlined"></div>
         </div>

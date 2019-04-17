@@ -11,7 +11,6 @@ const Landing = ({ backgroundFetched, game }) => {
   let games = [];
   if(game.similar_games){
     games = games.concat(game.similar_games);
-    games.push(game)
   }
   
 

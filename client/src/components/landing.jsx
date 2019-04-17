@@ -23,7 +23,7 @@ const Landing = ({ backgroundFetched, game }) => {
           <h1 className="landing-jumbo-title">VAPOR</h1>
           <div className="landing-jumbo-searchContainer">
             <i class="fas fa-search"></i>
-            <input className="landing-jumbo-searchbar" placeholder="Search a game..." autoFocus/>
+            <Searchbar />
           </div>
         </section>
       {backgroundFetched ? (

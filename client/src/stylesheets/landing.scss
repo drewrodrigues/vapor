@@ -61,6 +61,7 @@ body {
   font-weight: 700;
   margin: 0 auto;
   text-align: left;
+  margin-bottom: 50px;
 
   i {
     color: white;
@@ -72,14 +73,6 @@ body {
       cursor: pointer;
     }
   }
-}
-
-.landing-jumbo-searchbar {
-  width: 80%;
-  background: none;
-  padding: 15px 20px;
-  font-size: 20px;
-  font-weight: 700;
 }
 
 ::placeholder {

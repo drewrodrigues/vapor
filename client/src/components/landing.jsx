@@ -28,19 +28,20 @@ const Landing = ({ backgroundFetched, game }) => {
         </section>
       {backgroundFetched ? (
         <>
-          <div className="game-title-container">
-            <div className="game-title">
-              {game.name}
-            </div>
-          </div>
-          <GameInfo game={game}/>
-          {game.igdb_id ?
-            <div className="game-vis">
-              <Popularity games={games} />
-              <TTB game={game} />
-            </div>
-            : null}
-          <SimilarGamesRow />
+          <header className="searchResult-header">
+            <h3 className="searchResult-header-title">{ game.name }</h3>
+            <button className="searchResult-header-search">Search</button>
+          </header>
+          <section className="searchResult-body">
+            <GameInfo game={game}/>
+            {game.igdb_id ?
+              <div className="game-vis">
+                <Popularity games={games} />
+                <TTB game={game} />
+              </div>
+              : null}
+            <SimilarGamesRow />
+          </section>
         </>
           ) : null}
           <Screenshot />

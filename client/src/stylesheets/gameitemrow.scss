@@ -3,8 +3,8 @@
 
   font-family: 'Orbitron', sans-serif;
   display: flex;
-  overflow: auto;
-
+  overflow-y: hidden;
+  overflow-x: auto;
   height: 200px;
 }
 

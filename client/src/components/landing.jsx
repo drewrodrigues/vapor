@@ -5,6 +5,7 @@ import TTB  from '../components/game/ttb'
 import GameInfo from '../components/game/gameInfo'
 import SimilarGamesRow from './game/similarGamesRow';
 import Popularity from './game/popularity';
+import Searchbar from './search/searchbar'
 
 const Landing = ({ backgroundFetched, game }) => {
   let games = [];
@@ -15,28 +16,37 @@ const Landing = ({ backgroundFetched, game }) => {
   
 
   return (
-    <>
+    <div className="container">
       <section className="landing"> 
+        <section className="landing-jumbo">
+          <h2 className="landing-jumbo-subtitle">FIND SICK GAMES</h2>
+          <h1 className="landing-jumbo-title">VAPOR</h1>
+          <div className="landing-jumbo-searchContainer">
+            <i class="fas fa-search"></i>
+            <Searchbar />
+          </div>
+        </section>
       {backgroundFetched ? (
         <>
-          <div className="game-title-container">
-            <div className="game-title">
-              {game.name}
-            </div>
-          </div>
-          <GameInfo game={game}/>
-          {game.igdb_id ?
-            <div className="game-vis">
-              <Popularity games={games} />
-              <TTB game={game} />
-            </div>
-            : null}
-          <SimilarGamesRow />
+          <header className="searchResult-header">
+            <h3 className="searchResult-header-title">{ game.name }</h3>
+            <button className="searchResult-header-search">Search</button>
+          </header>
+          <section className="searchResult-body">
+            <GameInfo game={game}/>
+            {game.igdb_id ?
+              <div className="game-vis">
+                <Popularity games={games} />
+                <TTB game={game} />
+              </div>
+              : null}
+            <SimilarGamesRow />
+          </section>
         </>
           ) : null}
           <Screenshot />
         </section>
-    </>
+    </div>
   )
 
 }

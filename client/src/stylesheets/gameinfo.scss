@@ -35,3 +35,36 @@
 .none {
     opacity: .2;
 }
+
+.searchResult-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.searchResult-header-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 0 10px black;
+}
+
+.searchResult-header-search {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  background: #A6E22E;
+  box-shadow: 0 0 10px #A6E22E;
+  padding: 10px 15px;
+  border-radius: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.searchResult-body {
+  background: rgba(0,0,0,0.75);
+  border-radius: 10px;
+  box-shadow: 0 0 10px black;
+  padding: 20px;
+  margin-bottom: 50px;
+}

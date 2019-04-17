@@ -1,49 +1,26 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import PopularityGraph from "./popularity_graph";
+import VaporIcon from '../../assets/vapor_icon.svg';
+
 
 const Popularity = ({games}) => {
   const labels = games.map(game => {
     return game.name
   })
-  const popularities =  games.map(game => {
-    return game.popularity
+  const data =  games.map(game => {
+    const imageId =  game.screenshots ? game.screenshots[0].image_id : 0;
+    return ({
+      popularity: Math.round(game.popularity),
+      name: game.name,
+      url: imageId ? `https://images.igdb.com/igdb/image/upload/t_original/${imageId}.jpg` : VaporIcon
+    })
   })
-  const data = {
-    labels: labels,
-    
-    datasets: [{
-      label: "",
-      backgroundColor: '#184328',
-      borderWidth: 1,
-      data: popularities
-    }]
-  };
-
-
-
   return (
-    <div>
+    <>
       <h1>Popularity</h1>
-      <Bar 
-        type={'bar'} 
-        data={data} 
-        width={100} 
-        height={50} 
-        legend={{display: false}}
-        labelling={{display: false}}
-        options={{
-          scales: {
-            yAxes: [{
-              ticks: {
-                callback: function(value, index, values) {
-                  return ''
-                }
-              }
-            }]
-          },
-          maintainAspectRatio: false,
-        }} />
-    </div>
+      <PopularityGraph data={data} />
+    </>
   )
 }
 

@@ -75,6 +75,11 @@ body {
   }
 }
 
+.game-vis{
+  display: flex;
+  flex-direction: column;
+}
+
 ::placeholder {
   color: white;
 }

@@ -4,7 +4,11 @@
     justify-content: space-around;
 
     &>li{
-        
+      >a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
 
     .igdbScore{
@@ -24,6 +28,8 @@
     .price{
         background-image: url('../assets//dollar.png')
     }
+
+    
 
 }
 

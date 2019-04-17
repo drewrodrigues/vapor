@@ -1,0 +1,29 @@
+.fa-info-circle .ttb-score-info-text {
+  visibility: hidden;
+  width: 600px;
+  background-color: black;
+  color: #A5E22F;
+  font-weight: 300;
+  font-size: 10;
+  text-align: start;
+  line-height: 1.5;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%; 
+  margin-left: -400px;
+}
+
+.fa-info-circle:hover .ttb-score-info-text {
+  visibility: visible;
+}
+
+.landing-ttb-score-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-size: 26px;
+}

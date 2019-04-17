@@ -8,3 +8,5 @@ client/package-lock.json
 keys.js
 *.DS_Store
 *.swp
+package-lock.json
+client/package-lock.json

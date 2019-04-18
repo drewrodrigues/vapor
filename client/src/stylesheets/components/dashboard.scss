@@ -1,6 +1,6 @@
 .dashboard {
   margin-top: 100px;
-  background: #222;
+  background: rgba(0,0,0,0.75);
   padding: 20px 0;
   border-radius: 5px;
   box-shadow: 0 0 10px black;
@@ -36,7 +36,6 @@
   display: inline-block;
   width: 20%;
   margin-bottom: -4px;
-  border: 1px solid #000;
 }
 
 #dedication-score-chartdiv text, #dedication-score-chartdiv input {

@@ -8,6 +8,7 @@ import Autosuggest from 'react-autosuggest';
 import '../../stylesheets/searchbar.scss';
 import steamGames from '../../data/data.json';
 import steamSpy from '../../data/steamspy.json';
+import { clearLandingLoading } from '../../actions/loadingActions';
 
 const getSuggestions = value => {
     steamGames = steamGames.applist.apps.app;
@@ -54,13 +55,23 @@ class Searchbar extends React.Component{
             this.props.clearGame();
             this.props.clearGames();
             this.props.clearScreenshots();
+            this.props.clearLandingLoading();
             this.props.getSteamApp({ gameId: newValue.appid }).then(
                 () => {
-                    this.props.getIgdbApp({ name: newValue.name })
+                    setTimeout(() => { this.props.getIgdbApp({ name: newValue.name }) }, 2000)
+                   
                     const url = this.props.activeGame.screenshots[Math.floor(Math.random() * this.props.activeGame.screenshots.length)].path_full;
                     this.props.renderScreenshots(url)
+
                 }
-            );
+            ).then( () => {
+                console.log(this.props.landingJumbo)
+
+                // setTimeout(
+                // this.props.clearLandingLoading,
+                // 2000
+                // )
+            })
         } 
         else if (method === "type"){
             this.setState({ value: newValue });
@@ -127,7 +138,8 @@ const mapDispatchToProps = dispatch => {
         clearGame: () => dispatch(clearGame()),
         clearGames: () => dispatch(clearGames()),
         clearScreenshots: () => dispatch(clearScreenshots()),
-        renderScreenshots: (url) => dispatch(renderScreenshots(url))
+        renderScreenshots: (url) => dispatch(renderScreenshots(url)),
+        clearLandingLoading: () => dispatch(clearLandingLoading())
     }
 }
 

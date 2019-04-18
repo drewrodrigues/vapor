@@ -13,5 +13,3 @@ export const getStats = stats => dispatch => {
   return statUtil.getStats()
     .then(res => dispatch(receiveStats(res.data)))
 }
-
-window.getStats = getStats

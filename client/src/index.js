@@ -30,19 +30,19 @@ document.addEventListener('DOMContentLoaded', () => {
         store = configureStore({});
     }
     
-    window.API = API;
-    window.getState = store.getState;
-    window.dispatch = store.dispatch;
+    // window.API = API;
+    // window.getState = store.getState;
+    // window.dispatch = store.dispatch;
 
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={ store }/>, root);
 });
 
 // TEST
-window.steamSpy = steamSpy
-window.steamApps = steamApps
-window.API = API
-window.actions = actions
+// window.steamSpy = steamSpy
+// window.steamApps = steamApps
+// window.API = API
+// window.actions = actions
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

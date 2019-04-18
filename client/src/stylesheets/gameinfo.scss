@@ -42,6 +42,11 @@
     opacity: .2;
 }
 
+.searchResult-container {
+  transition: all 1s ease-in;  
+  opacity: 0;
+}
+
 .searchResult-header {
   position: relative;
   margin-bottom: 20px;

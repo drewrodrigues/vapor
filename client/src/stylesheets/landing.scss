@@ -40,7 +40,10 @@ body {
 }
 
 .landing-jumbo {
+  max-height: 300px;
   text-align: center;
+  transition: all 1s ease-in;  
+  // transition-delay: s;
 }
 
 .landing-jumbo-subtitle {

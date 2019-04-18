@@ -3,6 +3,7 @@ import React from 'react'
 import ProfileContainer from './dashboard/profileContainer'
 import TopGames from './dashboard/topGames'
 import DedicationScore from './dashboard/dedicationScore'
+import Screenshot from './bg_screenshot/screenshot';
 
 class Dashboard extends React.Component {
 	componentDidMount() {
@@ -17,6 +18,7 @@ class Dashboard extends React.Component {
 				<ProfileContainer />
 				<TopGames games={ topGames } />
 				<DedicationScore games={ topGames } /> 
+        <Screenshot />
 			</div>
 		)
 	}

@@ -6,12 +6,13 @@ import { getSteamApp, clearGame, getIgdbApp, clearGames, clearScreenshots,
 
 import Autosuggest from 'react-autosuggest';
 import '../../stylesheets/searchbar.scss';
-import steamGames from '../../data/data.json';
+import steamGamesJson from '../../data/data.json';
 import steamSpy from '../../data/steamspy.json';
 import { clearLandingLoading } from '../../actions/loadingActions';
 
+let steamGames = steamGamesJson.applist.apps.app;
+
 const getSuggestions = value => {
-    steamGames = steamGames.applist.apps.app;
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 

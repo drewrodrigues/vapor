@@ -131,5 +131,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-window.steamGames = steamGames;
 export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);

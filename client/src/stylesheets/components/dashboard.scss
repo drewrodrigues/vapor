@@ -107,6 +107,10 @@
   background: #111;
   vertical-align: top;
   border-radius: 5px;
+
+  i {
+    margin-right: 5px;  
+  }
 }
 
 .dashboard-stat:last-of-type {
@@ -184,6 +188,18 @@
 
 .dashboard-topGames {
   margin: 0 20px;
-  border-radius: 10px;
-  overflow: hidden;
+}
+
+.dashboard-subtitle {
+  font-size: 20px;
+  background: black;
+  margin: 0 -20px;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  text-align: center;
+
+  i {
+    margin-right: 10px;
+    color: #a5e22d;
+  }
 }

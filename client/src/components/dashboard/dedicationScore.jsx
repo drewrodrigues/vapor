@@ -12,6 +12,10 @@ const DedicationScore = ({ games }) => {
     return (
       <>
       <section className="dashboard-dedication-score">
+        <h2 className="dashboard-subtitle">
+          <i class="fas fa-bolt"></i>
+          Dedication Score
+        </h2>
         {
           games.forEach(game => {
             if (game.completedAchievements === "error") {

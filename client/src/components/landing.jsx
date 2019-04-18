@@ -52,7 +52,7 @@ const Landing = ({ backgroundFetched, game }) => {
 
 const mapStateToProps = state => {
   return {
-    backgroundFetched: state.ui.background.fetched,
+    backgroundFetched: state.ui.loading.backgroundUrl,
     game: state.entities.game
   };
 };

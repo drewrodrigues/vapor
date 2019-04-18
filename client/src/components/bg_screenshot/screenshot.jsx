@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class Screenshot extends React.Component {
 
   componentDidUpdate(prevProps) {
-    if(prevProps.screenshot !== this.props.screenshot){
+    if(this.props.screenshot && prevProps.screenshot !== this.props.screenshot){
       const bgImg = new Image();
       const bgElement = document.getElementsByClassName("bg-screenshot")[0];
       bgImg.onload = () => {
@@ -24,7 +24,7 @@ class Screenshot extends React.Component {
 const mapStateToProps = state => {
   const screenshots = state.entities.game.screenshots;
   return {
-    screenshot: state.ui.background.url,
+    screenshot: state.ui.loading.backgroundUrl,
     altName: state.entities.game.name
   };
 };

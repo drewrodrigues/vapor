@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import backgroundReducer from './backgroundReducer';
+import loadingReducer from './loadingReducer';
 
 const uiReducer = combineReducers({
-  background: backgroundReducer
+  loading: loadingReducer
 });
 
 export default uiReducer;

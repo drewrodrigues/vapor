@@ -6,7 +6,7 @@ import GameInfo from '../components/game/gameInfo'
 import SimilarGamesRow from './game/similarGamesRow';
 import Popularity from './game/popularity';
 import Searchbar from './search/searchbar'
-import { setLandingLoading } from '../actions/loadingActions';
+import { setLandingLoading, clearLandingLoading } from '../actions/loadingActions';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -18,23 +18,26 @@ class Landing extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if(!this.props.loading){
-      console.log(this.landingJumbo.current)
       this.landingJumbo.current.style.opacity = '0'
-      setTimeout(() => { 
-        this.landingJumbo.current.style.maxHeight = '0px';
-        this.searchResult.current.style.opacity = '1';
+      setTimeout(() => {
+        if (this.landingJumbo.current && this.searchResult.current){
+          this.landingJumbo.current.style.maxHeight = '0px';
+          this.searchResult.current.style.opacity = '1';
+        }
       }, 1000)
-
-      
     }
   }
-
+  componentWillUnmount() { 
+    this.props.setLandingLoading();
+  }
   handleClick(){
     this.props.setLandingLoading();
     this.landingJumbo.current.style.maxHeight = '300px';
     this.searchResult.current.style.opacity = '0';
     setTimeout(() => { 
-      this.landingJumbo.current.style.opacity = '1'
+      if (this.landingJumbo.current){
+        this.landingJumbo.current.style.opacity = '1'
+      }
       }, 1000)
 
   }
@@ -94,7 +97,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => (
   {
-    setLandingLoading: () => dispatch(setLandingLoading())
+    setLandingLoading: () => dispatch(setLandingLoading()),
+    clearLandingLoading: () => dispatch(clearLandingLoading())
   }
 )
 

@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <main className="main">
-        <Navbar />
+        <Navbar pathname={this.props.location.pathname}/>
         <Switch>
           <ProtectedRoute path="/dashboard" component={ DashboardContainer } />
           <Route path="/" component={ LandingContainer } />

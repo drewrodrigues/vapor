@@ -36,22 +36,22 @@ class Profile extends React.Component {
       </header>
 
       <section className="dashboard-stats clear">
-        <div className="dashboard-stat">
+        <div className="dashboard-stat dashboard-stat-orange">
           <p className="dashboard-stat-title">Hours Played</p>
           <span className="dashboard-stat-user orange">{ totalTimePlayed }</span>
           <span className="dashboard-stat-average">{ averagePlaytime } average</span>
         </div>
-        <div className="dashboard-stat">
+        <div className="dashboard-stat dashboard-stat-blue">
           <p className="dashboard-stat-title">Games</p>
           <span className="dashboard-stat-user blue">{ totalGames }</span>
           <span className="dashboard-stat-average">{ averageGames } average</span>
         </div>
-        <div className="dashboard-stat">
+        <div className="dashboard-stat dashboard-stat-green">
           <p className="dashboard-stat-title">Achievements</p>
           <span className="dashboard-stat-user green">{ totalAchievements }</span>
           <span className="dashboard-stat-average">{ averageAchievements } average</span>
         </div>
-        <div className="dashboard-stat">
+        <div className="dashboard-stat dashboard-stat-red">
           <p className="dashboard-stat-title">Completion</p>
           <span className="dashboard-stat-user red">{ percentageAchievementsCompleted }%</span>
           <span className="dashboard-stat-average">overall achievements</span>

@@ -66,8 +66,6 @@ class Searchbar extends React.Component{
 
                 }
             ).then( () => {
-                console.log(this.props.landingJumbo)
-
                 // setTimeout(
                 // this.props.clearLandingLoading,
                 // 2000

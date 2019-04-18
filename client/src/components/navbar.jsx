@@ -18,11 +18,12 @@ class Navbar extends React.Component {
   }
 
   getLinks() {
-    if (this.props.loggedIn) {
+    let { pathname, loggedIn } = this.props;
+    if (loggedIn) {
       return (
         <div className="session">
-          <Link to="/" className="active">Search</Link>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/" className={pathname === '/' ? 'active' : ''}>Search</Link>
+          <Link to="/dashboard" className={pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link>
           <button onClick={ this.logoutUser }>Logout</button>
         </div>
       )

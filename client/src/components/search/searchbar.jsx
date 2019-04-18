@@ -55,11 +55,11 @@ class Searchbar extends React.Component{
             this.props.clearGames();
             this.props.clearScreenshots();
             this.props.getSteamApp({ gameId: newValue.appid }).then(
-                () => this.props.getIgdbApp({ name: newValue.name })
-            ).then(
                 () => {
+                    this.props.getIgdbApp({ name: newValue.name })
                     const url = this.props.activeGame.screenshots[Math.floor(Math.random() * this.props.activeGame.screenshots.length)].path_full;
-                    this.props.renderScreenshots(url)}
+                    this.props.renderScreenshots(url)
+                }
             );
         } 
         else if (method === "type"){

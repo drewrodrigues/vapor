@@ -36,23 +36,39 @@ class Profile extends React.Component {
       </header>
 
       <section className="dashboard-stats clear">
+        <h2 className="dashboard-subtitle">
+          <i class="fas fa-chart-line"></i>
+          Your Stats
+        </h2>
         <div className="dashboard-stat dashboard-stat-orange">
-          <p className="dashboard-stat-title">Hours Played</p>
+          <p className="dashboard-stat-title">
+            <i class="fas fa-hourglass-half"></i>
+            Hours Played
+          </p>
           <span className="dashboard-stat-user orange">{ totalTimePlayed }</span>
           <span className="dashboard-stat-average">{ averagePlaytime } average</span>
         </div>
         <div className="dashboard-stat dashboard-stat-blue">
-          <p className="dashboard-stat-title">Games</p>
+          <p className="dashboard-stat-title">
+            <i class="fas fa-gamepad"></i>
+            Games
+          </p>
           <span className="dashboard-stat-user blue">{ totalGames }</span>
           <span className="dashboard-stat-average">{ averageGames } average</span>
         </div>
         <div className="dashboard-stat dashboard-stat-green">
-          <p className="dashboard-stat-title">Achievements</p>
+          <p className="dashboard-stat-title">
+            <i class="fas fa-trophy"></i>
+            Achievements
+          </p>
           <span className="dashboard-stat-user green">{ totalAchievements }</span>
           <span className="dashboard-stat-average">{ averageAchievements } average</span>
         </div>
         <div className="dashboard-stat dashboard-stat-red">
-          <p className="dashboard-stat-title">Completion</p>
+          <p className="dashboard-stat-title">
+            <i class="fas fa-check-double"></i>
+            Completion
+          </p>
           <span className="dashboard-stat-user red">{ percentageAchievementsCompleted }%</span>
           <span className="dashboard-stat-average">overall achievements</span>
         </div>

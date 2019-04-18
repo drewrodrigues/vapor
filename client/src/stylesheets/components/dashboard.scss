@@ -35,7 +35,14 @@
 .dashboard-ownedGame {
   display: inline-block;
   width: 20%;
-  margin-bottom: -4px;
+  width: 24%;
+  margin-right: 1.3333%;
+  margin-bottom: 1.3333%;
+  border-radius: 5px;
+}
+
+.dashboard-ownedGame:nth-of-type(4n) {
+  margin-right: 0;
 }
 
 #dedication-score-chartdiv text, #dedication-score-chartdiv input {

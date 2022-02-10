@@ -6,7 +6,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "jwt-decode": "^2.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "query-string": "^6.3.0",
     "react": "^16.8.4",
     "react-autosuggest": "^9.4.3",

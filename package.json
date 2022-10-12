@@ -17,7 +17,7 @@
     "node": "8.11.4"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.3.12",
+    "@amcharts/amcharts4": "^4.10.29",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
